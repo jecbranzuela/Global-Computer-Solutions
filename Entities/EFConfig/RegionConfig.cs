@@ -14,6 +14,11 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Region> builder)
         {
             builder.ToTable("Region");
+            builder.HasKey(c => c.RegionId);
+            builder.Property(c => c.RegionId).ValueGeneratedOnAdd();
+
+            builder.HasIndex(c => c.Name).IsUnique();
+            builder.Property(c => c.Name).IsRequired();
         }
     }
 }

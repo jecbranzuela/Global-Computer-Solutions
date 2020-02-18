@@ -10,7 +10,6 @@ namespace Entities
         //public int RegionId { get; set; } //region id sa customer
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<WorkLog> WorkLogs { get; set; }
 
         //foreign keys
         public int EmployeeId { get; set; }

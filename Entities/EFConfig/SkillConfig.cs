@@ -14,6 +14,11 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Skill> builder)
         {
             builder.ToTable("Skill");
+            builder.HasKey(c => c.SkillId);
+            builder.Property(c => c.SkillId).ValueGeneratedOnAdd();
+
+            builder.HasIndex(c => c.Description).IsUnique();
+            builder.Property(c => c.Description).IsRequired();
         }
     }
 }

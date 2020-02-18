@@ -12,7 +12,9 @@ namespace GCSClasses.Migrations
                 columns: table => new
                 {
                     BillId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TotalHoursWorked = table.Column<int>(nullable: false),
+                    Amount = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +27,7 @@ namespace GCSClasses.Migrations
                 {
                     RegionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +40,7 @@ namespace GCSClasses.Migrations
                 {
                     SkillId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
                     RateOfPay = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -212,6 +214,34 @@ namespace GCSClasses.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Work Log",
+                columns: table => new
+                {
+                    WorkLogId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
+                    TotalHoursWorked = table.Column<int>(nullable: false),
+                    ProjectId = table.Column<int>(nullable: false),
+                    BillId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Work Log", x => x.WorkLogId);
+                    table.ForeignKey(
+                        name: "FK_Work Log_Bill_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bill",
+                        principalColumn: "BillId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Work Log_Project_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Project",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Project Schedule Task",
                 columns: table => new
                 {
@@ -262,34 +292,6 @@ namespace GCSClasses.Migrations
                         column: x => x.ProjectScheduleTaskId,
                         principalTable: "Project Schedule Task",
                         principalColumn: "ProjectScheduleTaskId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Work Log",
-                columns: table => new
-                {
-                    WorkLogId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TotalHoursWorked = table.Column<int>(nullable: false),
-                    AssignmentId = table.Column<int>(nullable: false),
-                    BillId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Work Log", x => x.WorkLogId);
-                    table.ForeignKey(
-                        name: "FK_Work Log_Assignment_AssignmentId",
-                        column: x => x.AssignmentId,
-                        principalTable: "Assignment",
-                        principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Work Log_Bill_BillId",
-                        column: x => x.BillId,
-                        principalTable: "Bill",
-                        principalColumn: "BillId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -349,6 +351,25 @@ namespace GCSClasses.Migrations
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Region_Name",
+                table: "Region",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skill_Description",
+                table: "Skill",
+                column: "Description",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Task_Description",
+                table: "Task",
+                column: "Description",
+                unique: true,
+                filter: "[Description] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Task Skill_SkillId",
                 table: "Task Skill",
                 column: "SkillId");
@@ -359,18 +380,21 @@ namespace GCSClasses.Migrations
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Work Log_AssignmentId",
-                table: "Work Log",
-                column: "AssignmentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Work Log_BillId",
                 table: "Work Log",
                 column: "BillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work Log_ProjectId",
+                table: "Work Log",
+                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Assignment");
+
             migrationBuilder.DropTable(
                 name: "Employee Skill");
 
@@ -381,16 +405,13 @@ namespace GCSClasses.Migrations
                 name: "Work Log");
 
             migrationBuilder.DropTable(
+                name: "Project Schedule Task");
+
+            migrationBuilder.DropTable(
                 name: "Skill");
 
             migrationBuilder.DropTable(
-                name: "Assignment");
-
-            migrationBuilder.DropTable(
                 name: "Bill");
-
-            migrationBuilder.DropTable(
-                name: "Project Schedule Task");
 
             migrationBuilder.DropTable(
                 name: "Project Schedule");

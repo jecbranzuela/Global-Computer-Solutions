@@ -9,8 +9,8 @@ namespace Entities
         public int TotalHoursWorked { get; set; }
 
         //foreign keys
-        public int AssignmentId { get; set; }
-        public Assignment AssignmentLink { get; set; }
+        public int ProjectId { get; set; }
+        public Project ProjectLink { get; set; }
         public int BillId { get; set; }
         public Bill BillLink { get; set; }
 

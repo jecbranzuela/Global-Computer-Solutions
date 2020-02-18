@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GCSClasses.Migrations
 {
     [DbContext(typeof(GcsContext))]
-    [Migration("20200218054651_v1")]
+    [Migration("20200218102732_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,12 @@ namespace GCSClasses.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("TotalHoursWorked")
+                        .HasColumnType("int");
 
                     b.HasKey("BillId");
 
@@ -228,9 +234,13 @@ namespace GCSClasses.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RegionId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Region");
                 });
@@ -243,12 +253,16 @@ namespace GCSClasses.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RateOfPay")
                         .HasColumnType("int");
 
                     b.HasKey("SkillId");
+
+                    b.HasIndex("Description")
+                        .IsUnique();
 
                     b.ToTable("Skill");
                 });
@@ -285,23 +299,23 @@ namespace GCSClasses.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AssignmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BillId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TotalHoursWorked")
                         .HasColumnType("int");
 
                     b.HasKey("WorkLogId");
 
-                    b.HasIndex("AssignmentId");
-
                     b.HasIndex("BillId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Work Log");
                 });
@@ -314,7 +328,7 @@ namespace GCSClasses.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -323,6 +337,10 @@ namespace GCSClasses.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("TaskId");
+
+                    b.HasIndex("Description")
+                        .IsUnique()
+                        .HasFilter("[Description] IS NOT NULL");
 
                     b.ToTable("Task");
                 });
@@ -431,15 +449,15 @@ namespace GCSClasses.Migrations
 
             modelBuilder.Entity("Entities.WorkLog", b =>
                 {
-                    b.HasOne("Entities.Assignment", "AssignmentLink")
-                        .WithMany("WorkLogs")
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Bill", "BillLink")
                         .WithMany("WorkLogs")
                         .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Project", "ProjectLink")
+                        .WithMany("WorkLogs")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

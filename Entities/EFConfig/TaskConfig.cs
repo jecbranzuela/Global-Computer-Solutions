@@ -13,6 +13,9 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<EFClasses.Task> builder)
         {
             builder.ToTable("Task");
+            builder.Property(c => c.TaskId).ValueGeneratedOnAdd();
+
+            builder.HasIndex(c => c.Description).IsUnique();
         }
     }
 }

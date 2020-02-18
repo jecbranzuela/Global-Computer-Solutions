@@ -14,6 +14,8 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Bill> builder)
         {
             builder.ToTable("Bill");
+
+            builder.Property(c => c.BillId).ValueGeneratedOnAdd();
         }
     }
 }
