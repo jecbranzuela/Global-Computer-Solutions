@@ -19,7 +19,7 @@ namespace Entities
         public ICollection<ProjectSchedule> ProjectSchedules { get; set; }
 
         //foreign keys
-        public int EmployeeId { get; set; }
+        public int EmployeeId { get; set; } //manager
         public Employee EmployeeLink { get; set; }
         public int CustomerId { get; set; }
         public Customer CustomerLink { get; set; }
