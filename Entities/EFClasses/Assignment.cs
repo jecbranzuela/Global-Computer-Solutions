@@ -6,11 +6,16 @@ namespace Entities
     public class Assignment
     {
         public int AssignmentId { get; set; }
-        public int EmployeeId { get; set; }
-        public int ProjectScheduleTaskId { get; set; }
-        public int RegionId { get; set; } //region id sa customer
+
+        //public int RegionId { get; set; } //region id sa customer
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ICollection<WorkLog> WorkLogs { get; set; }
+
+        //foreign keys
+        public int EmployeeId { get; set; }
+        public Employee EmployeeLink { get; set; }
+        public int ProjectScheduleTaskId { get; set; }
+        public ProjectScheduleTask ProjectScheduleTaskLink { get; set; }
     }
 }

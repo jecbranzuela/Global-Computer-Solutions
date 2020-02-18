@@ -13,7 +13,6 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<EFClasses.Task> builder)
         {
             builder.ToTable("Task");
-            builder.HasKey(c => c.TaskId);
         }
     }
 }

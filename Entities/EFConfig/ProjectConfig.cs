@@ -14,6 +14,16 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Project> builder)
         {
             builder.ToTable("Project");
+
+            builder.HasOne(c => c.CustomerLink)
+                .WithMany(c => c.Projects)
+                .HasForeignKey(c => c.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(c => c.EmployeeLink)
+                .WithMany(c => c.Projects)
+                .HasForeignKey(c => c.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

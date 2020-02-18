@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GCSClasses
 {
-    public class GCSContext :DbContext
+    public class GcsContext :DbContext
     {
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Bill> Bills { get; set; }
