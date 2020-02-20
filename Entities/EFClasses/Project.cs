@@ -17,7 +17,7 @@ namespace Entities
         public DateTime ActualEndDate { get; set; }
         public int ActualCost { get; set; }
         public ICollection<ProjectSchedule> ProjectSchedules { get; set; }
-        public ICollection<WorkLog> WorkLogs { get; set; }
+        public ICollection<Bill> Bills { get; set; }
 
         //foreign keys
         public int EmployeeId { get; set; } //manager

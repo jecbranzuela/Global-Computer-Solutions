@@ -57,10 +57,15 @@ namespace GCSClasses.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TotalHoursWorked")
                         .HasColumnType("int");
 
                     b.HasKey("BillId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Bill");
                 });
@@ -297,23 +302,28 @@ namespace GCSClasses.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AssignmentLinkProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("BillId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TotalHoursWorked")
                         .HasColumnType("int");
 
                     b.HasKey("WorkLogId");
 
-                    b.HasIndex("BillId");
+                    b.HasIndex("AssignmentId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("AssignmentLinkProjectId");
+
+                    b.HasIndex("BillId");
 
                     b.ToTable("Work Log");
                 });
@@ -347,13 +357,20 @@ namespace GCSClasses.Migrations
                 {
                     b.HasOne("Entities.Employee", "EmployeeLink")
                         .WithMany("Assignments")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("Entities.ProjectScheduleTask", "ProjectScheduleTaskLink")
                         .WithMany("Assignments")
                         .HasForeignKey("ProjectScheduleTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Bill", b =>
+                {
+                    b.HasOne("Entities.Project", "ProjectLink")
+                        .WithMany("Bills")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -447,16 +464,20 @@ namespace GCSClasses.Migrations
 
             modelBuilder.Entity("Entities.WorkLog", b =>
                 {
-                    b.HasOne("Entities.Bill", "BillLink")
+                    b.HasOne("Entities.Assignment", null)
                         .WithMany("WorkLogs")
-                        .HasForeignKey("BillId")
+                        .HasForeignKey("AssignmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Project", "ProjectLink")
+                    b.HasOne("Entities.Project", "AssignmentLink")
+                        .WithMany()
+                        .HasForeignKey("AssignmentLinkProjectId");
+
+                    b.HasOne("Entities.Bill", "BillLink")
                         .WithMany("WorkLogs")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

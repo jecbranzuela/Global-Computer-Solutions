@@ -16,5 +16,6 @@ namespace Entities
         public Employee EmployeeLink { get; set; }
         public int ProjectScheduleTaskId { get; set; }
         public ProjectScheduleTask ProjectScheduleTaskLink { get; set; }
+        public ICollection<WorkLog> WorkLogs { get; set; }
     }
 }

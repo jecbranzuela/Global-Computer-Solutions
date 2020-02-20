@@ -8,20 +8,6 @@ namespace GCSClasses.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Bill",
-                columns: table => new
-                {
-                    BillId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalHoursWorked = table.Column<int>(nullable: false),
-                    Amount = table.Column<float>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bill", x => x.BillId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Region",
                 columns: table => new
                 {
@@ -195,6 +181,27 @@ namespace GCSClasses.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bill",
+                columns: table => new
+                {
+                    BillId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TotalHoursWorked = table.Column<int>(nullable: false),
+                    Amount = table.Column<float>(nullable: false),
+                    ProjectId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bill", x => x.BillId);
+                    table.ForeignKey(
+                        name: "FK_Bill_Project_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Project",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Project Schedule",
                 columns: table => new
                 {
@@ -207,34 +214,6 @@ namespace GCSClasses.Migrations
                     table.PrimaryKey("PK_Project Schedule", x => x.ProjectScheduleId);
                     table.ForeignKey(
                         name: "FK_Project Schedule_Project_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Project",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Work Log",
-                columns: table => new
-                {
-                    WorkLogId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TotalHoursWorked = table.Column<int>(nullable: false),
-                    ProjectId = table.Column<int>(nullable: false),
-                    BillId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Work Log", x => x.WorkLogId);
-                    table.ForeignKey(
-                        name: "FK_Work Log_Bill_BillId",
-                        column: x => x.BillId,
-                        principalTable: "Bill",
-                        principalColumn: "BillId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Work Log_Project_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Project",
                         principalColumn: "ProjectId",
@@ -286,13 +265,48 @@ namespace GCSClasses.Migrations
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "EmployeeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Assignment_Project Schedule Task_ProjectScheduleTaskId",
                         column: x => x.ProjectScheduleTaskId,
                         principalTable: "Project Schedule Task",
                         principalColumn: "ProjectScheduleTaskId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Work Log",
+                columns: table => new
+                {
+                    WorkLogId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
+                    TotalHoursWorked = table.Column<int>(nullable: false),
+                    AssignmentId = table.Column<int>(nullable: false),
+                    AssignmentLinkProjectId = table.Column<int>(nullable: true),
+                    BillId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Work Log", x => x.WorkLogId);
+                    table.ForeignKey(
+                        name: "FK_Work Log_Assignment_AssignmentId",
+                        column: x => x.AssignmentId,
+                        principalTable: "Assignment",
+                        principalColumn: "AssignmentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Work Log_Project_AssignmentLinkProjectId",
+                        column: x => x.AssignmentLinkProjectId,
+                        principalTable: "Project",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Work Log_Bill_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bill",
+                        principalColumn: "BillId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -304,6 +318,11 @@ namespace GCSClasses.Migrations
                 name: "IX_Assignment_ProjectScheduleTaskId",
                 table: "Assignment",
                 column: "ProjectScheduleTaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bill_ProjectId",
+                table: "Bill",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_RegionId",
@@ -380,21 +399,23 @@ namespace GCSClasses.Migrations
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Work Log_AssignmentId",
+                table: "Work Log",
+                column: "AssignmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work Log_AssignmentLinkProjectId",
+                table: "Work Log",
+                column: "AssignmentLinkProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Work Log_BillId",
                 table: "Work Log",
                 column: "BillId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Work Log_ProjectId",
-                table: "Work Log",
-                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Assignment");
-
             migrationBuilder.DropTable(
                 name: "Employee Skill");
 
@@ -405,13 +426,16 @@ namespace GCSClasses.Migrations
                 name: "Work Log");
 
             migrationBuilder.DropTable(
-                name: "Project Schedule Task");
-
-            migrationBuilder.DropTable(
                 name: "Skill");
 
             migrationBuilder.DropTable(
+                name: "Assignment");
+
+            migrationBuilder.DropTable(
                 name: "Bill");
+
+            migrationBuilder.DropTable(
+                name: "Project Schedule Task");
 
             migrationBuilder.DropTable(
                 name: "Project Schedule");

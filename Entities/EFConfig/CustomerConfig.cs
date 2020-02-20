@@ -14,6 +14,7 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("Customer");
+            builder.Property(c => c.CustomerId).ValueGeneratedOnAdd();
         }
     }
 }

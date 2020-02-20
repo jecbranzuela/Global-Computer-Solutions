@@ -14,6 +14,7 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<Project> builder)
         {
             builder.ToTable("Project");
+            builder.Property(c => c.ProjectId).ValueGeneratedOnAdd();
 
             builder.HasOne(c => c.CustomerLink)
                 .WithMany(c => c.Projects)

@@ -14,6 +14,11 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<WorkLog> builder)
         {
             builder.ToTable("Work Log");
+
+            builder.HasOne(c => c.BillLink)
+                .WithMany(c => c.WorkLogs)
+                .HasForeignKey(c => c.BillId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

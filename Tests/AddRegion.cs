@@ -17,7 +17,7 @@ namespace CreateTests
         {
             using var context = new GcsContext();
             var newRegion = new Region();
-            newRegion.Name = "NorthWest (NW)";
+            newRegion.Name = "SouthEast (SE)";
             context.Regions.Add(newRegion);
             context.SaveChanges();
             Console.WriteLine($"Name of newly added region is {newRegion.Name.ToUpper()} " +
