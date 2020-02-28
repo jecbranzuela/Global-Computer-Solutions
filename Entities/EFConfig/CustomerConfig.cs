@@ -15,6 +15,11 @@ namespace GCSClasses.EFConfig
         {
             builder.ToTable("Customer");
             builder.Property(c => c.CustomerId).ValueGeneratedOnAdd();
+            builder.Property(c => c.IsDeleted).HasDefaultValue(false);
+
+            builder.HasOne(c => c.RegionLink)
+                .WithMany(c => c.Customers)
+                .HasForeignKey(c => c.RegionId);
         }
     }
 }

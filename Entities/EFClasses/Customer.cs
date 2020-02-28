@@ -9,9 +9,10 @@ namespace Entities
         public int PhoneNumber { get; set; }
         public ICollection<Project> Projects { get; set; }
 
+
         //foreign key
         public int RegionId { get; set; }
         public Region RegionLink { get; set; }
-
+        public bool IsDeleted { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace GCSClasses.EFConfig
         {
             builder.ToTable("Project");
             builder.Property(c => c.ProjectId).ValueGeneratedOnAdd();
+            builder.Property(c => c.IsDeleted).HasDefaultValue(false);
 
             builder.HasOne(c => c.CustomerLink)
                 .WithMany(c => c.Projects)

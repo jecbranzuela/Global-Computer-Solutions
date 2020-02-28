@@ -12,7 +12,7 @@ namespace Entities
         //foreign keys
         public int ProjectScheduleId { get; set; }
         public ProjectSchedule ProjectScheduleLink { get; set; }
-        public int TaskId { get; set; }
-        public Task TaskLink { get; set; }
+        public int TaskClassId { get; set; }
+        public TaskClass TaskClassLink { get; set; }
     }
 }

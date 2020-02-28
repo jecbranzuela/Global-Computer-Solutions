@@ -24,5 +24,6 @@ namespace Entities
         public Employee EmployeeLink { get; set; }
         public int CustomerId { get; set; }
         public Customer CustomerLink { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

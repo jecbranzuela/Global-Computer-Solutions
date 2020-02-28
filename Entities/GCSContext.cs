@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using GCSClasses.EFClasses;
 using GCSClasses.EFConfig;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ namespace GCSClasses
         public DbSet<ProjectScheduleTask> ProjectScheduleTasks { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Skill> Skills { get; set; }
-        public DbSet<EFClasses.Task> Tasks { get; set; }
+        public DbSet<TaskClass> TaskClasses { get; set; }
         public DbSet<TaskSkill> TaskSkills { get; set; }
         public DbSet<WorkLog> WorkLogs { get; set; }
 
@@ -45,7 +46,7 @@ namespace GCSClasses
             modelBuilder.ApplyConfiguration(new ProjectScheduleTaskConfig());
             modelBuilder.ApplyConfiguration(new RegionConfig());
             modelBuilder.ApplyConfiguration(new SkillConfig());
-            modelBuilder.ApplyConfiguration(new TaskConfig());
+            modelBuilder.ApplyConfiguration(new TaskClassConfig());
             modelBuilder.ApplyConfiguration(new TaskSkillConfig());
             modelBuilder.ApplyConfiguration(new WorkLogConfig());
         }

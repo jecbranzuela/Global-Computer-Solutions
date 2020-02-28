@@ -38,7 +38,7 @@ namespace GCSClasses.Migrations
                 name: "Task",
                 columns: table => new
                 {
-                    TaskId = table.Column<int>(nullable: false)
+                    TaskClassId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -46,7 +46,7 @@ namespace GCSClasses.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.TaskId);
+                    table.PrimaryKey("PK_Task", x => x.TaskClassId);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,7 +57,8 @@ namespace GCSClasses.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<int>(nullable: false),
-                    RegionId = table.Column<int>(nullable: false)
+                    RegionId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +81,8 @@ namespace GCSClasses.Migrations
                     MiddleInitial = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     DateOfHire = table.Column<DateTime>(nullable: false),
-                    RegionId = table.Column<int>(nullable: false)
+                    RegionId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -101,7 +103,7 @@ namespace GCSClasses.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumberOfEmployeesNeeded = table.Column<int>(nullable: false),
                     SkillId = table.Column<int>(nullable: false),
-                    TaskId = table.Column<int>(nullable: false)
+                    TaskClassId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,10 +115,10 @@ namespace GCSClasses.Migrations
                         principalColumn: "SkillId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Task Skill_Task_TaskId",
-                        column: x => x.TaskId,
+                        name: "FK_Task Skill_Task_TaskClassId",
+                        column: x => x.TaskClassId,
                         principalTable: "Task",
-                        principalColumn: "TaskId",
+                        principalColumn: "TaskClassId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -161,7 +163,8 @@ namespace GCSClasses.Migrations
                     ActualEndDate = table.Column<DateTime>(nullable: false),
                     ActualCost = table.Column<int>(nullable: false),
                     EmployeeId = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false)
+                    CustomerId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -227,7 +230,7 @@ namespace GCSClasses.Migrations
                     ProjectScheduleTaskId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectScheduleId = table.Column<int>(nullable: false),
-                    TaskId = table.Column<int>(nullable: false)
+                    TaskClassId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,10 +242,10 @@ namespace GCSClasses.Migrations
                         principalColumn: "ProjectScheduleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Project Schedule Task_Task_TaskId",
-                        column: x => x.TaskId,
+                        name: "FK_Project Schedule Task_Task_TaskClassId",
+                        column: x => x.TaskClassId,
                         principalTable: "Task",
-                        principalColumn: "TaskId",
+                        principalColumn: "TaskClassId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -282,9 +285,9 @@ namespace GCSClasses.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(nullable: false),
                     TotalHoursWorked = table.Column<int>(nullable: false),
+                    BillId = table.Column<int>(nullable: false),
                     AssignmentId = table.Column<int>(nullable: false),
-                    AssignmentLinkProjectId = table.Column<int>(nullable: true),
-                    BillId = table.Column<int>(nullable: false)
+                    AssignmentLinkProjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -365,9 +368,9 @@ namespace GCSClasses.Migrations
                 column: "ProjectScheduleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project Schedule Task_TaskId",
+                name: "IX_Project Schedule Task_TaskClassId",
                 table: "Project Schedule Task",
-                column: "TaskId");
+                column: "TaskClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Region_Name",
@@ -382,21 +385,14 @@ namespace GCSClasses.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_Description",
-                table: "Task",
-                column: "Description",
-                unique: true,
-                filter: "[Description] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Task Skill_SkillId",
                 table: "Task Skill",
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task Skill_TaskId",
+                name: "IX_Task Skill_TaskClassId",
                 table: "Task Skill",
-                column: "TaskId");
+                column: "TaskClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Work Log_AssignmentId",

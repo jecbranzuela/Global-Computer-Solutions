@@ -20,5 +20,8 @@ namespace Entities
         public int RegionId { get; set; }
         public Region RegionLink { get; set; }
 
+        //delete status
+        public bool IsDeleted { get; set; }
+
     }
 }

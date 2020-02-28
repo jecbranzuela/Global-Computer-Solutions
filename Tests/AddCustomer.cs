@@ -13,7 +13,7 @@ namespace CreateTests
     public class AddCustomer
     {
         [Test]
-        public void AddCustomer_AddCustomerAutoGenerateId()
+        public void Customer_AddCustomerAutoGenerateId()
         {
             using var context= new GcsContext();
             var newCust = new Customer();

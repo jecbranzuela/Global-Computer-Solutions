@@ -14,6 +14,7 @@ namespace GCSClasses.EFConfig
         public void Configure(EntityTypeBuilder<TaskSkill> builder)
         {
             builder.ToTable("Task Skill");
+            builder.Property(c => c.TaskSkillId).ValueGeneratedOnAdd();
         }
     }
 }

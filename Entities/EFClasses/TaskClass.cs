@@ -7,9 +7,9 @@ using Entities;
 
 namespace GCSClasses.EFClasses
 {
-    public class Task
+    public class TaskClass
     {
-        public int TaskId { get; set; }
+        public int TaskClassId { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

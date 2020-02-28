@@ -15,6 +15,7 @@ namespace GCSClasses.EFConfig
         {
             builder.ToTable("Employee");
             builder.Property(c => c.EmployeeId).ValueGeneratedOnAdd();
+            builder.Property(c => c.IsDeleted).HasDefaultValue(false);
         }
     }
 }

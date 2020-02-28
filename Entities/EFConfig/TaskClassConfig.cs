@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GCSClasses.EFConfig
 {
-    public class TaskConfig:IEntityTypeConfiguration<GCSClasses.EFClasses.Task>
+    public class TaskClassConfig:IEntityTypeConfiguration<GCSClasses.EFClasses.TaskClass>
     {
-        public void Configure(EntityTypeBuilder<EFClasses.Task> builder)
+        public void Configure(EntityTypeBuilder<GCSClasses.EFClasses.TaskClass> builder)
         {
             builder.ToTable("Task");
-            builder.Property(c => c.TaskId).ValueGeneratedOnAdd();
+            builder.Property(c => c.TaskClassId).ValueGeneratedOnAdd();
 
-            builder.HasIndex(c => c.Description).IsUnique();
+            //builder.HasIndex(c => c.Description).IsUnique();
         }
     }
 }

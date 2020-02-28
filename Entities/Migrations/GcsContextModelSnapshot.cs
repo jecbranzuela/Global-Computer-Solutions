@@ -15,7 +15,7 @@ namespace GCSClasses.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -77,6 +77,11 @@ namespace GCSClasses.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -105,6 +110,11 @@ namespace GCSClasses.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -181,6 +191,11 @@ namespace GCSClasses.Migrations
                     b.Property<DateTime>("EstimatedStartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.HasKey("ProjectId");
 
                     b.HasIndex("CustomerId");
@@ -217,14 +232,14 @@ namespace GCSClasses.Migrations
                     b.Property<int>("ProjectScheduleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TaskId")
+                    b.Property<int>("TaskClassId")
                         .HasColumnType("int");
 
                     b.HasKey("ProjectScheduleTaskId");
 
                     b.HasIndex("ProjectScheduleId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("TaskClassId");
 
                     b.ToTable("Project Schedule Task");
                 });
@@ -283,14 +298,14 @@ namespace GCSClasses.Migrations
                     b.Property<int>("SkillId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TaskId")
+                    b.Property<int>("TaskClassId")
                         .HasColumnType("int");
 
                     b.HasKey("TaskSkillId");
 
                     b.HasIndex("SkillId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("TaskClassId");
 
                     b.ToTable("Task Skill");
                 });
@@ -328,15 +343,15 @@ namespace GCSClasses.Migrations
                     b.ToTable("Work Log");
                 });
 
-            modelBuilder.Entity("GCSClasses.EFClasses.Task", b =>
+            modelBuilder.Entity("GCSClasses.EFClasses.TaskClass", b =>
                 {
-                    b.Property<int>("TaskId")
+                    b.Property<int>("TaskClassId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -344,11 +359,7 @@ namespace GCSClasses.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("TaskId");
-
-                    b.HasIndex("Description")
-                        .IsUnique()
-                        .HasFilter("[Description] IS NOT NULL");
+                    b.HasKey("TaskClassId");
 
                     b.ToTable("Task");
                 });
@@ -440,9 +451,9 @@ namespace GCSClasses.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GCSClasses.EFClasses.Task", "TaskLink")
+                    b.HasOne("GCSClasses.EFClasses.TaskClass", "TaskClassLink")
                         .WithMany()
-                        .HasForeignKey("TaskId")
+                        .HasForeignKey("TaskClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -455,9 +466,9 @@ namespace GCSClasses.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GCSClasses.EFClasses.Task", "TaskLink")
+                    b.HasOne("GCSClasses.EFClasses.TaskClass", "TaskClassLink")
                         .WithMany("TaskSkills")
-                        .HasForeignKey("TaskId")
+                        .HasForeignKey("TaskClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
