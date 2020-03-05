@@ -17,9 +17,11 @@ namespace CreateTests
         {
             using var context= new GcsContext();
             var newCust = new Customer();
-            newCust.Name = "Qwerty D. Uiop";
-            newCust.PhoneNumber = 01234567890;
-            newCust.RegionId = 1;
+            newCust.FirstName = "Hello";
+            newCust.MiddleInitial = "D.";
+            newCust.LastName = "World";
+            newCust.PhoneNumber = 22018;
+            newCust.RegionId = 4;
             newCust.RegionLink = context.Regions.First(c => c.RegionId == newCust.RegionId);
             context.Customers.Add(newCust);
             context.SaveChanges();

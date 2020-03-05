@@ -16,7 +16,7 @@ namespace GCSClasses.EFConfig
             builder.ToTable("Assignment");
 
 
-            //optional relationship between assignment and employee, an can have zero or many assignments
+            //optional relationship between assignment and employee, an employee can have zero or many assignments
             builder.HasOne(c => c.EmployeeLink)
                 .WithMany(c => c.Assignments)
                 .HasForeignKey(c => c.EmployeeId)

@@ -1,12 +1,11 @@
-﻿<Window x:Class="App1.AddEmployeeWindow"
+﻿<Window x:Class="App1.ViewModels.Customer.AddCustomerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:App1"
+        xmlns:local="clr-namespace:App1.ViewModels.Customer"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Title="AddEmployeeWindow" Height="450" Width="400">
+        Title="AddCustomerView" Height="450" Width="400">
     <Grid>
         <StackPanel
             HorizontalAlignment="Left"
@@ -49,12 +48,24 @@
                 HorizontalAlignment="Left"/>
             <TextBlock 
                 Margin="40,30,0,0"
-                Text="Date of Hire: "
+                Text="Phone #: "
                 FontSize="15"
                 Width="100" 
                 Height="30" 
                 FontWeight="Bold"
                 HorizontalAlignment="Left"/>
+
+            <Button
+                x:Name="btnCancel"
+                Content="Cancel"
+                FontSize="15"
+                FontWeight="Bold"
+                Margin="30,30,0,0"
+                Width="100" 
+                Height="30"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Left" Click="BtnCancel_OnClick">
+            </Button>
 
         </StackPanel>
 
@@ -66,6 +77,7 @@
             Orientation="Vertical">
 
             <TextBox 
+                Text="{Binding Path=AddCustomerModel.FirstName}"
                 Margin="0,30,30,0"
                 FontSize="15"
                 Width="170" 
@@ -73,7 +85,8 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Right"/>
 
-            <TextBox 
+            <TextBox
+                Text="{Binding Path=AddCustomerModel.MiddleInitial}"
                 Margin="0,30,30,0"
                 FontSize="15"
                 Width="170" 
@@ -81,7 +94,8 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Right"/>
 
-            <TextBox 
+            <TextBox
+                Text="{Binding Path=AddCustomerModel.LastName}"
                 Margin="0,30,30,0"
                 FontSize="15"
                 Width="170" 
@@ -90,6 +104,9 @@
                 HorizontalAlignment="Right"/>
 
             <ComboBox
+                ItemsSource="{Binding Path=Regions}"
+                SelectedItem="{Binding Path=SelectedRegion}"
+                DisplayMemberPath="Name"
                 Margin="0,30,30,0"
                 Width="170" 
                 Height="30"
@@ -98,17 +115,18 @@
                 VerticalContentAlignment="Center">
             </ComboBox>
 
-            <DatePicker
+            <TextBox
+                Text="{Binding Path=AddCustomerModel.PhoneNumber}"
                 Margin="0,30,30,0"
+                FontSize="15"
                 Width="170" 
                 Height="30"
                 FontWeight="Bold"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center">
-
-            </DatePicker>
+                HorizontalAlignment="Right"/>
 
             <Button
+                x:Name="btnAdd"
+                Click="BtnAdd_OnClick"
                 IsDefault="True"
                 Content="Add"
                 FontSize="15"
@@ -118,10 +136,8 @@
                 Height="30"
                 HorizontalContentAlignment="Center"
                 HorizontalAlignment="Right">
-
             </Button>
 
         </StackPanel>
-
     </Grid>
 </Window>

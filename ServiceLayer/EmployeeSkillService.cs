@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using GCSClasses;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer
 {
@@ -19,7 +20,9 @@ namespace ServiceLayer
 
         public IQueryable<EmployeeSkill> GetEmployeeSkills()
         {
-            return _context.EmployeeSkills;
+            return _context.EmployeeSkills
+                .Include(c=>c.EmployeeLink)
+                .Include(c=>c.SkillLink);
         }
     }
 }

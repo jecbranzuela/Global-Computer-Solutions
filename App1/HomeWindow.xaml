@@ -4,14 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App1.UserControls"
+        xmlns:skill="clr-namespace:App1.ViewModels.Skill"
+        xmlns:region="clr-namespace:App1.ViewModels.Region"
+        xmlns:project="clr-namespace:App1.ViewModels.Project"
+        xmlns:employee="clr-namespace:App1.ViewModels.Employee"
+        xmlns:customer="clr-namespace:App1.ViewModels.Customer"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="HomeWindow" Height="800" Width="1200">
     <Grid>
-        <StackPanel
-            Orientation="Vertical">
-            <Menu
-                Background="White"
+        <DockPanel>
+            <Menu DockPanel.Dock="Top"
+                Background="AliceBlue"
                 Height="30">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -24,32 +28,85 @@
                           FontWeight="Bold"
                           VerticalContentAlignment="Center"
                           HorizontalAlignment="Right">
-                    <MenuItem Header="Account Settings"/>
+                    <MenuItem Header="Region Settings" Click="RegionSettings"/>
                     <MenuItem Header="Logout" Click="LoutCom"/>
-                    
+
                 </MenuItem>
             </Menu>
 
-            <StackPanel
-                Orientation="Horizontal">
-                <Grid
-                VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Height="750"
-            Width="300">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                    <StackPanel
-                    Orientation="Vertical">
+                <!--SIDE BUTTONS-->
+                <Grid
+                    Grid.Column="0"
+                    DockPanel.Dock="Left"
+                    Background="AliceBlue"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="750"
+                    Width="300">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button
+                            x:Name="btnHome"
+                            Click="BtnHome_OnClick"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Width="200" 
+                            Height="50"
+                            BorderThickness="0"
+                            Background="AliceBlue">
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Margin="0,0,0,0"
+                                    Source="img/homeIcon.png"
+                                    VerticalAlignment="Center"
+                                    Width="30" 
+                                    Height="30"/>
+                                <TextBlock
+                                    Margin="30,0,0,0"
+                                    Text="Home"
+                                    FontSize="25"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"/>
+                            </StackPanel>
+                        </Button>
 
                         <Button
                             x:Name="btnEmpList"
                             Click="BtnEmpList_OnClick"
-                            Margin="0,80,0,0"
-                        Width="200" 
-                        Height="50"
-                        HorizontalContentAlignment="Left"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -68,12 +125,13 @@
                         <Button
                         x:Name="btnNewEmp"
                         Click="BtnNewEmp_OnClick"
-                        Margin="80,15,0,0"
-                        Width="120" 
-                        Height="30"
-                        HorizontalContentAlignment="Left"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -92,14 +150,15 @@
 
 
                         <Button
-                            x:Name="btnNewCust"
-                            Click="BtnNewCust_OnClick"
+                            Click="BtnCustListShow_OnClick"
                         Margin="0,50,0,0"
-                        Width="200" 
-                        Height="50"
-                        HorizontalContentAlignment="Left"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -116,12 +175,15 @@
                             </StackPanel>
                         </Button>
                         <Button
-                        Margin="80,15,0,0"
-                        Width="120" 
-                        Height="30"
-                        HorizontalContentAlignment="Left"
+                            x:Name="btnNewCust"
+                            Click="BtnNewCust_OnClick"
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -139,12 +201,15 @@
                         </Button>
 
                         <Button
-                        Margin="0,50,0,0"
-                        Width="200" 
-                        Height="50"
-                        HorizontalContentAlignment="Left"
+                            x:Name="btnShowProjectList"
+                            Click="BtnShowProjectList_OnClick"
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -160,13 +225,17 @@
                                 FontWeight="Bold"/>
                             </StackPanel>
                         </Button>
+
                         <Button
-                        Margin="80,15,0,0"
-                        Width="120" 
-                        Height="30"
-                        HorizontalContentAlignment="Left"
+                            x:Name="btnNewProj"
+                            Click="BtnNewProj_OnClick"
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -184,12 +253,16 @@
                         </Button>
 
                         <Button
-                        Margin="0,50,0,0"
-                        Width="200" 
-                        Height="50"
-                        HorizontalContentAlignment="Left"
+                            x:Name="btnShowSkillsList"
+                            Click="BtnShowSkillsList_OnClick"
+                            Margin="0,50,0,0"
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -206,12 +279,15 @@
                             </StackPanel>
                         </Button>
                         <Button
-                        Margin="80,15,0,0"
-                        Width="120" 
-                        Height="30"
-                        HorizontalContentAlignment="Left"
+                            x:Name="btnAddNewSkill"
+                            Click="BtnAddNewSkill_OnClick"
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         BorderThickness="0"
-                        Background="White">
+                        Background="AliceBlue">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                 Margin="0,0,0,0"
@@ -228,47 +304,59 @@
                             </StackPanel>
                         </Button>
 
-                    </StackPanel>
-
-                    <Border
+                        <Border
                     BorderThickness="1.5"
                     BorderBrush="AliceBlue"
                 />
                 </Grid>
-                <Grid>
+
+
+                <!--VIEWS-->
+                <Grid
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3">
+
+                    <!--HOME GRID-->
                     <Grid
-                        x:Name="emplListGrid"
+                        DockPanel.Dock="Left"
+                        x:Name="HomeGrid"
                         Visibility="Hidden"
                         HorizontalAlignment="Left"
-                        Background="Aqua" Width="900">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
+                        Background="White" Width="900">
+                        <Image
+                            Source="img/gcsLogo.png"
+                            VerticalAlignment="Center"/> </Grid>
+                    
+                    <!--EMPLOYEE GRID-->
+                    <employee:EmployeeTabView
+                        DockPanel.Dock="Left"
+                        Visibility="Collapsed"
+                        x:Name="emplListGrid"/>
 
-                    <Grid
-                        x:Name="custListGrid"
-                        Visibility="Hidden"
-                        HorizontalAlignment="Left"
-                        Background="Red" Width="900">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                    <!--CUSTOMER GRID-->
+                    <customer:CustomerTabView 
+                        Visibility="Collapsed"
+                        x:Name="custListGrid"/>
+                   
+                    <!--Project Grid-->
+                    <project:ProjectTabView 
+                        Visibility="Collapsed"
+                        x:Name="ProjectsListGrid"/>
 
-                    </Grid>
+                    <!--Skills Grid-->
+                    <skill:SkillTabView 
+                        Visibility="Collapsed"
+                        x:Name="SkillsListGrid"/>
+
+                    <!--Regions Grid-->
+                    <region:RegionTabView 
+                        Visibility="Collapsed"
+                        x:Name="RegionsListGrid"/>
                 </Grid>
-            </StackPanel>
-            
+            </Grid>
 
-        </StackPanel>
+
+        </DockPanel>
 
 
 

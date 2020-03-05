@@ -1,0 +1,147 @@
+﻿<Window x:Class="App1.ViewModels.Employee.AddEmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App1.ViewModels.Employee"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="AddEmployeeView" Height="450" Width="400">
+    <Grid>
+        <StackPanel
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="200"
+            Height="434"
+            Orientation="Vertical">
+
+            <TextBlock 
+                Margin="40,30,0,0"
+                Text="First Name: "
+                FontSize="15"
+                Width="100" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"/>
+            <TextBlock 
+                Margin="40,30,0,0"
+                Text="Middle Initial: "
+                FontSize="15"
+                Width="100" 
+                Height="30" 
+                FontWeight="Bold"
+                HorizontalAlignment="Left"/>
+            <TextBlock 
+                Margin="40,30,0,0"
+                Text="Last Name: "
+                FontSize="15"
+                Width="100" 
+                Height="30" 
+                FontWeight="Bold"
+                HorizontalAlignment="Left"/>
+            <TextBlock 
+                Margin="40,30,0,0"
+                Text="Region: "
+                FontSize="15"
+                Width="100" 
+                Height="30" 
+                FontWeight="Bold"
+                HorizontalAlignment="Left"/>
+            <TextBlock 
+                Margin="40,30,0,0"
+                Text="Date of Hire: "
+                FontSize="15"
+                Width="100" 
+                Height="30" 
+                FontWeight="Bold"
+                HorizontalAlignment="Left"/>
+
+            <Button
+                x:Name="btnCancel"
+                Content="Cancel"
+                FontSize="15"
+                FontWeight="Bold"
+                Margin="30,30,0,0"
+                Width="100" 
+                Height="30"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Left" Click="BtnCancel_OnClick">
+            </Button>
+
+        </StackPanel>
+
+        <StackPanel
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Width="200"
+            Height="434"
+            Orientation="Vertical" Margin="200,0,0,0">
+
+            <TextBox 
+                Text="{Binding Path=AddEmployeeModel.FirstName}"
+                Margin="0,30,30,0"
+                FontSize="15"
+                Width="170" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalAlignment="Right"/>
+
+            <TextBox
+                Text="{Binding Path=AddEmployeeModel.MiddleInitial}"
+                Margin="0,30,30,0"
+                FontSize="15"
+                Width="170" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalAlignment="Right"/>
+
+            <TextBox 
+                Text="{Binding Path=AddEmployeeModel.LastName}"
+                Margin="0,30,30,0"
+                FontSize="15"
+                Width="170" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalAlignment="Right"/>
+
+            <ComboBox
+                ItemsSource="{Binding Path=Regions}"
+                SelectedItem="{Binding Path=SelectedRegion}"
+                DisplayMemberPath="Name"
+                Margin="0,30,30,0"
+                Width="170" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center">
+            </ComboBox>
+
+            <DatePicker
+                Text="{Binding Path=AddEmployeeModel.DateOfHire}"
+                Margin="0,30,30,0"
+                Width="170" 
+                Height="30"
+                FontWeight="Bold"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center">
+
+            </DatePicker>
+
+            <Button
+                x:Name="btnAdd"
+                Click="BtnAdd_OnClick"
+                IsDefault="True"
+                Content="Add"
+                FontSize="15"
+                FontWeight="Bold"
+                Margin="0,30,30,0"
+                Width="100" 
+                Height="30"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Right">
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

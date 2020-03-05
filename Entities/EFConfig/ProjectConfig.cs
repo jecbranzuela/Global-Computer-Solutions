@@ -17,6 +17,11 @@ namespace GCSClasses.EFConfig
             builder.Property(c => c.ProjectId).ValueGeneratedOnAdd();
             builder.Property(c => c.IsDeleted).HasDefaultValue(false);
 
+            //pwede dili sa ibutang sa pag create sa project, pwede at a later date na ibutang
+            builder.Property(c => c.ActualEndDate).IsRequired(false);
+            builder.Property(c => c.ActualStartDate).IsRequired(false);
+            builder.Property(c => c.ActualCost).IsRequired(false);
+
             builder.HasOne(c => c.CustomerLink)
                 .WithMany(c => c.Projects)
                 .HasForeignKey(c => c.CustomerId)

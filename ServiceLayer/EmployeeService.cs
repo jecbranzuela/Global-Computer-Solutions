@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using GCSClasses;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer
 {
@@ -17,10 +18,11 @@ namespace ServiceLayer
             _context = context;
         }
 
-        public IQueryable<Employee> GetEmployees()
+        public IQueryable<Entities.Employee> GetEmployees()
         {
             return _context.Employees
-                .Where(c=>c.IsDeleted==false);
+                .Where(c=>c.IsDeleted==false)
+                .Include(c=>c.RegionLink);
         }
 
         public void AddEmployee(Employee employee)

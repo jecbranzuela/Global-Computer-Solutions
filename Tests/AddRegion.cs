@@ -20,7 +20,7 @@ namespace CreateTests
             newRegion.Name = "SouthEast (SE)";
             context.Regions.Add(newRegion);
             context.SaveChanges();
-            Console.WriteLine($"Name of newly added region is {newRegion.Name.ToUpper()} " +
+            Console.WriteLine($"FirstName of newly added region is {newRegion.Name.ToUpper()} " +
                               $"with region id of {newRegion.RegionId}");
 
         }

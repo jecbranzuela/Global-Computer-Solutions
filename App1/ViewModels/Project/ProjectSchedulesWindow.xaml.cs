@@ -10,14 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace App1
+namespace App1.ViewModels.Project
 {
     /// <summary>
-    /// Interaction logic for AddEmployeeWindow.xaml
+    /// Interaction logic for ProjectSchedulesWindow.xaml
     /// </summary>
-    public partial class AddEmployeeWindow : Window
+    public partial class ProjectSchedulesWindow : Window
     {
-        public AddEmployeeWindow()
+        public ProjectSchedulesWindow()
         {
             InitializeComponent();
         }

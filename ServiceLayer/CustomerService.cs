@@ -29,11 +29,13 @@ namespace ServiceLayer
             _context.SaveChanges();
         }
 
-        public void EditCustomer(int customerId, int regionId, string name, int phoneNumber)
+        public void EditCustomer(int customerId, int regionId, string firstName, string middleInitial,string lastName,int phoneNumber)
         {
             var customer = _context.Customers.Find(customerId);
             customer.RegionId = regionId;
-            customer.Name = name;
+            customer.FirstName = firstName;
+            customer.MiddleInitial = middleInitial;
+            customer.LastName = lastName;
             customer.PhoneNumber = phoneNumber;
             customer.RegionLink = _context.Regions.First(c => c.RegionId == customer.RegionId);
 

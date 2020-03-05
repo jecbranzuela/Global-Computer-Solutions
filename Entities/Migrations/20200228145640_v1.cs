@@ -55,7 +55,9 @@ namespace GCSClasses.Migrations
                 {
                     CustomerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    MiddleInitial = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<int>(nullable: false),
                     RegionId = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)

@@ -13,9 +13,9 @@ namespace Entities
         public DateTime EstimatedStartDate { get; set; }
         public DateTime EstimatedEndDate { get; set; }
         public int Budget { get; set; }
-        public DateTime ActualStartDate { get; set; }
-        public DateTime ActualEndDate { get; set; }
-        public int ActualCost { get; set; }
+        public DateTime? ActualStartDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
+        public int? ActualCost { get; set; }
         public ICollection<ProjectSchedule> ProjectSchedules { get; set; }
         public ICollection<Bill> Bills { get; set; }
 

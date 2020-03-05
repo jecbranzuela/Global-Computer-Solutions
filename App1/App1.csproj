@@ -11,11 +11,20 @@
     <None Remove="img\addprojectIcon.png" />
     <None Remove="img\customerIcon.png" />
     <None Remove="img\employeeIcon.png" />
+    <None Remove="img\gcsLogo.png" />
+    <None Remove="img\homeIcon.png" />
     <None Remove="img\newSkillIcon.png" />
     <None Remove="img\otherSettingsIcon.png" />
     <None Remove="img\projectIcon.png" />
+    <None Remove="img\searchIcon.png" />
     <None Remove="img\settingsIcon.png" />
     <None Remove="img\skillIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\gcsLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +52,9 @@
     <Resource Include="img\employeeIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="img\homeIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\newSkillIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -52,10 +64,17 @@
     <Resource Include="img\projectIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="img\searchIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\settingsIcon.png" />
     <Resource Include="img\skillIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Bills\" />
   </ItemGroup>
 
 </Project>
