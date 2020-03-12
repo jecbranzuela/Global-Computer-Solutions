@@ -31,6 +31,20 @@ namespace ServiceLayer
             _context.SaveChanges();
         }
 
+        public IList<Skill> GetSkills(int employeeId)
+        {
+	        var empSkills = _context.EmployeeSkills
+	        .Where(c => c.EmployeeId == employeeId)
+	        .Include(c => c.SkillLink);
+
+	        var skillList = new List<Skill>();
+	        foreach (var empSkill in empSkills)
+	        {
+		        skillList.Add(empSkill.SkillLink);
+	        }
+				
+	        return skillList;
+        }
         public void EditEmployee(int employeeId, int regionId, string firstName, string lastName, string middleInitial)
         {
             //using var context = new GcsContext();

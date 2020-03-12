@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid
-                        HorizontalAlignment="Center"
+        HorizontalAlignment="Center"
                         Width="900" Height="750" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180*"/>

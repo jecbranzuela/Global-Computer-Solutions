@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App1.ViewModels.Employee;
 using App1.ViewModels.Skill;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer;
@@ -18,9 +19,7 @@ namespace App1.ViewModels
 
         public ObservableCollection<SkillViewModel> SkillList { get;}
 
-        public Entities.Skill SkillReference { get; }
-
-      public ObservableCollection<EmployeeViewModel> EmployeesWithSameSkill { get; }
+        public ObservableCollection<EmployeeViewModel> EmployeesWithSameSkill { get; }
 
       public SkillViewModel SelectedSkill
       {
@@ -32,36 +31,34 @@ namespace App1.ViewModels
 
           }
       }
-
-      private void LoadEmployeeWithSelectedSkill()
+      public SkillListViewModel(SkillService skillService)
       {
-          var employees = _skillService.GetEmployees(SelectedSkill.SkillId);
+          EmployeesWithSameSkill = new ObservableCollection<EmployeeViewModel>();
+          _skillService = skillService;
+          SkillList = new ObservableCollection<SkillViewModel>(
+              _skillService.GetSkills()
+                  .Select(c => new SkillViewModel(c.SkillId,
+                      c.Description, c.RateOfPay))
+          );
+      }
+        private void LoadEmployeeWithSelectedSkill()
+		{
+          var employees = _skillService.GetEmployees(SelectedSkill.SkillId)
+              .OrderBy(c=>c.LastName);
           EmployeesWithSameSkill.Clear();
           foreach (var employee in employees)
           {
-              EmployeesWithSameSkill.Add(new EmployeeViewModel(
-                  employee.LastName,
-                  employee.MiddleInitial,
-                  employee.FirstName,
-                  employee.DateOfHire,
-                  employee.RegionLink.Name,
-                  employee.RegionId
-                  ));
+	          EmployeesWithSameSkill.Add(new EmployeeViewModel(employee));
           }
 
-      }
+		}
 
-      public SkillListViewModel(SkillService skillService)
+        public EditSkillViewModel EditSkillViewModel()
         {
-            EmployeesWithSameSkill = new ObservableCollection<EmployeeViewModel>();
-            SkillReference = new Entities.Skill();
-            _skillService = skillService;
-            SkillList = new ObservableCollection<SkillViewModel>(
-                _skillService.GetSkills()
-                    .Select(c=> new SkillViewModel(c.SkillId,
-                        c.Description,c.RateOfPay))
-                );
+            return new EditSkillViewModel(_skillService,_selectedSkill);
         }
+
+
 
         public string SearchText
         {

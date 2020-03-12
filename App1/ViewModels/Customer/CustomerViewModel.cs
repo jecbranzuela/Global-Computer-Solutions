@@ -18,6 +18,7 @@ namespace App1.ViewModels.Customer
         private int _phoneNumber;
         private string _region;
         private int _regionId;
+        public string FullName { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -27,14 +28,29 @@ namespace App1.ViewModels.Customer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public CustomerViewModel(string lastName, string middleInitial, string firstName, int phoneNumber, string region, int regionId)
+        //public CustomerViewModel(string lastName, string middleInitial, string firstName, int phoneNumber, string region, int regionId)
+        //{
+        //    _lastName = lastName;
+        //    _middleInitial = middleInitial;
+        //    _firstName = firstName;
+        //    _phoneNumber = phoneNumber;
+        //    _region = region;
+        //    _regionId = regionId;
+        //    FullName = $"{_lastName},  {_firstName}";
+        //}
+
+        public CustomerViewModel(Entities.Customer customer)
         {
-            _lastName = lastName;
-            _middleInitial = middleInitial;
-            _firstName = firstName;
-            _phoneNumber = phoneNumber;
-            _region = region;
-            _regionId = regionId;
+	        CustomerId = customer.CustomerId;
+	        LastName = customer.LastName;
+	        MiddleInitial = customer.MiddleInitial;
+	        FirstName = customer.FirstName;
+	        PhoneNumber = customer.PhoneNumber;
+	        Region = customer.RegionLink.Name;
+	        RegionId = customer.RegionId;
+	        FullName = $"{_lastName},  {_firstName}";
+
+
         }
 
         public CustomerViewModel()

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ServiceLayer;
 
 namespace App1.ViewModels.Employee
 {
@@ -17,9 +18,26 @@ namespace App1.ViewModels.Employee
     /// </summary>
     public partial class EditEmployeeView : Window
     {
-        public EditEmployeeView()
+	    private EditEmployeeViewModel _toEditEmployee;
+        private EditEmployeeView()
         {
             InitializeComponent();
+        }
+
+        public EditEmployeeView(EditEmployeeViewModel empToEdit) : this()
+        {
+	        DataContext = _toEditEmployee =empToEdit;
+        }
+
+        private void BtnSave_OnClick(object sender, RoutedEventArgs e)
+        {
+            _toEditEmployee.Edit();
+            Close();
+        }
+
+        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

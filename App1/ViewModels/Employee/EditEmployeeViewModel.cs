@@ -12,10 +12,9 @@ namespace App1.ViewModels.Employee
     public class EditEmployeeViewModel
     {
         private EmployeeService _employeeService;
-        private RegionService _regionService;
         public EmployeeViewModel AssociatedEmployeeModel { get; private set; }
         public ObservableCollection<Entities.Region> Regions { get; }
-        public Entities.Region SelecteRegion { get; set; }
+        public Entities.Region SelectedRegion { get; set; }
 
         public string LastName { get; set; }
         public string MiddleInitial { get; set; }
@@ -23,16 +22,15 @@ namespace App1.ViewModels.Employee
         public DateTime DateOfHire { get; set; }
         public string Region { get; set; }
 
-        public EditEmployeeViewModel(EmployeeViewModel employeeModel,
-            EmployeeService employeeService, RegionService regionService)
+        public EditEmployeeViewModel(EmployeeViewModel employeeModel, 
+        EmployeeRegionService employeeRegionService)
         {
             AssociatedEmployeeModel = employeeModel;
-            _employeeService = employeeService;
-            _regionService = regionService;
+            _employeeService = employeeRegionService.EmployeeService;
             Regions = new ObservableCollection<Entities.Region>(
-                _regionService.GetRegions());
+                employeeRegionService.RegionService.GetRegions());
 
-            SelecteRegion = Regions.First(c => c.RegionId == AssociatedEmployeeModel.RegionId);
+            SelectedRegion = Regions.First(c => c.RegionId == AssociatedEmployeeModel.RegionId);
 
             CopyEditableFields(employeeModel);
         }
@@ -43,19 +41,33 @@ namespace App1.ViewModels.Employee
             MiddleInitial = employeeModel.MiddleInitial;
             FirstName = employeeModel.FirstName;
             DateOfHire = employeeModel.DateOfHire;
+            Region = employeeModel.Region;
         }
 
-        //public void Edit()
-        //{
-        //    AssociatedEmployeeModel.LastName = LastName;
-        //    AssociatedEmployeeModel.MiddleInitial = MiddleInitial;
-        //    AssociatedEmployeeModel.FirstName = FirstName;
-        //    AssociatedEmployeeModel.DateOfHire = DateOfHire;
+        public void Edit()
+        {
+            AssociatedEmployeeModel.LastName = LastName;
+            AssociatedEmployeeModel.MiddleInitial = MiddleInitial;
+            AssociatedEmployeeModel.FirstName = FirstName;
+            AssociatedEmployeeModel.DateOfHire = DateOfHire;
 
-        //    if (SelecteRegion == null)
-        //    {
-        //        _employeeService.EditEmployee();
-        //    }
-        //}
+            if (SelectedRegion == null)
+            {
+                _employeeService.EditEmployee(
+                AssociatedEmployeeModel.EmployeeId,AssociatedEmployeeModel.RegionId,
+                AssociatedEmployeeModel.FirstName,AssociatedEmployeeModel.LastName,
+                AssociatedEmployeeModel.MiddleInitial);
+            }
+            else
+            {
+                _employeeService.EditEmployee(
+                AssociatedEmployeeModel.EmployeeId,AssociatedEmployeeModel.RegionId,
+                AssociatedEmployeeModel.FirstName,AssociatedEmployeeModel.LastName,
+                AssociatedEmployeeModel.MiddleInitial
+                );
+
+                AssociatedEmployeeModel.Region = SelectedRegion.Name;
+            }
+        }
     }
 }

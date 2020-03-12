@@ -26,7 +26,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <ListBox 
-                            BorderBrush="AliceBlue"
+            ItemsSource="{Binding Path=RegionList}"
+            SelectedItem="{Binding Path=SelectedRegion}"
+            DisplayMemberPath="Name"
+            BorderBrush="AliceBlue"
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
@@ -80,18 +83,9 @@
                             FontSize="15" 
                             Grid.ColumnSpan="4"
                             Margin="24,110,34,0" Grid.Row="2"/>
-        <ListBox
-                            BorderBrush="AliceBlue"
-                            Grid.Column="2" 
-                            Grid.ColumnSpan="4" 
-                            Margin="24,0,34,72" 
-                            Grid.RowSpan="2" Grid.Row="1"></ListBox>
-        <ListBox
-                            BorderBrush="AliceBlue"
-                            Grid.Column="2" 
-                            Grid.ColumnSpan="4" 
-                            Margin="24,0,34,72" 
-                            Grid.RowSpan="2" Grid.Row="3"></ListBox>
+
+
+
         <TextBlock
                             Text="Region Name:"
                             Grid.Column="2"
@@ -135,6 +129,31 @@
                             HorizontalAlignment="Center" 
                             Width="130">
         </Button>
+
+        <!--ItemsSource="{Binding Path=EmployeesWithSameRegion}"-->
+        <ListBox
+            x:Name="lbEmp"
+            DisplayMemberPath="FullName"
+            ItemsSource="{Binding Path=EmployeesWithSameRegion}"
+            BorderBrush="AliceBlue"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            Margin="24,0,34,72" 
+            Grid.RowSpan="2" Grid.Row="1">
+        </ListBox>
+
+        <!--ItemsSource="{Binding Path=CustomersWithSameRegion}"-->
+        <ListBox
+            ItemsSource="{Binding Path=CustomersWithSameRegion}"
+            DisplayMemberPath="FullName"
+            x:Name="lbCust"
+            BorderBrush="AliceBlue"
+            Grid.Column="2" 
+            Grid.ColumnSpan="4" 
+            Margin="24,0,34,72" 
+            Grid.RowSpan="2" Grid.Row="3">
+        </ListBox>
     </Grid>
+
 
 </UserControl>

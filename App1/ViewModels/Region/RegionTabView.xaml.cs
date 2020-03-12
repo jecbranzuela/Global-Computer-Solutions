@@ -21,6 +21,8 @@ namespace App1.ViewModels.Region
         public RegionTabView()
         {
             InitializeComponent();
+            lbCust.Items.Clear();
+            lbEmp.Items.Clear();
         }
     }
 }

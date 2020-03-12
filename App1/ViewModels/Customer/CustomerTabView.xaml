@@ -247,6 +247,8 @@
                                     FontWeight="Bold"/>
             </Button>
             <Button
+                x:Name="btnEdit"
+                Click="BtnEdit_OnClick"
                                 BorderThickness="2"
                                 Background="White"
                                 Height="30"
@@ -257,20 +259,6 @@
                 <TextBlock
                                     Foreground="Black"
                                     Text="Edit Customer"
-                                    FontSize="15"
-                                    FontWeight="Bold"/>
-            </Button>
-            <Button
-                                BorderThickness="2"
-                                Background="White"
-                                Height="30"
-                                Grid.Column="2"
-                                Grid.Row="9"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                <TextBlock
-                                    Foreground="Black"
-                                    Text="Remove Customer"
                                     FontSize="15"
                                     FontWeight="Bold"/>
             </Button>

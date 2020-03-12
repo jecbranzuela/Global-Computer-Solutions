@@ -22,5 +22,12 @@ namespace App1.ViewModels.Customer
         {
             InitializeComponent();
         }
+
+        private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+            var custListContext = (CustomerListViewModel)DataContext;
+            var edCust = new EditCustomerView(custListContext.CreateEditCustomerViewModel());
+            edCust.Show();
+        }
     }
 }

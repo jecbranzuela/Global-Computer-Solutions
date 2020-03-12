@@ -42,6 +42,15 @@ namespace ServiceLayer
             return empList;
         }
 
+        public void EditSkill(int skillId, string description, int rateOfPay)
+        {
+            var skill = _context.Skills.Find(skillId);
+            skill.Description = description;
+            skill.RateOfPay = rateOfPay;
+
+            _context.SaveChanges();
+        }
+
         public void AddSkill(Skill skill)
         {
             _context.Skills.Add(skill);

@@ -22,5 +22,15 @@ namespace App1.ViewModels.Employee
         {
             InitializeComponent();
         }
+
+        private void BtnEditEmployee_OnClick(object sender, RoutedEventArgs e)
+        {
+	        var employeeListContext = (EmployeeListViewModel)DataContext;
+            
+
+
+	        var edEmp = new EditEmployeeView(employeeListContext.CreateEditEmployeeViewModel());
+            edEmp.Show();
+        }
     }
 }

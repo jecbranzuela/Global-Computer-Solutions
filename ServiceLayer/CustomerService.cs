@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using GCSClasses;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer
 {
@@ -20,7 +21,8 @@ namespace ServiceLayer
         public IQueryable<Customer> GetCustomers()
         {
             return _context.Customers
-                .Where(c=>c.IsDeleted ==false);
+                .Where(c=>c.IsDeleted ==false)
+            .Include(c=>c.RegionLink);
         }
 
         public void AddCustomer(Customer customer)

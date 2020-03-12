@@ -13,6 +13,7 @@ using App1.UserControls;
 using App1.ViewModels;
 using App1.ViewModels.Employee;
 using App1.ViewModels.Project;
+using App1.ViewModels.Region;
 using App1.ViewModels.Skill;
 using GCSClasses;
 using ServiceLayer;
@@ -25,6 +26,12 @@ namespace App1
     /// </summary>
     public partial class HomeWindow : Window
     {
+	    #region EmployeeRegion
+
+	    private EmployeeRegionService employeeRegionService;
+	    private CustomerRegionService customerRegionService;
+
+	    #endregion
         #region employee
 
         private EmployeeListViewModel _employeeListViewModel;
@@ -46,28 +53,26 @@ namespace App1
 
         #endregion
 
-        #region EmployeeSkill
-
-        private EmployeeSkillListViewModel _employeeSkillListViewModel;
-        private EmployeeSkillService _employeeSkillService;
-#endregion
-
-    
+        private RegionListViewModel _regionListViewModel;
         private RegionService _regionService;
+        
         public HomeWindow()
         {
             InitializeComponent();
 
+            employeeRegionService = new EmployeeRegionService(new GcsContext());
+            customerRegionService = new CustomerRegionService(new GcsContext());
+
             #region employee
 
             _employeeService = new EmployeeService(new GcsContext());
-            _employeeListViewModel = new EmployeeListViewModel(_employeeService);
+            _employeeListViewModel = new EmployeeListViewModel(employeeRegionService);
 
             #endregion
 
             #region customer
             _customerService = new CustomerService(new GcsContext());
-            _customerListViewModel = new CustomerListViewModel(_customerService);
+            _customerListViewModel = new CustomerListViewModel(customerRegionService);
 
             #endregion
 
@@ -77,19 +82,19 @@ namespace App1
 
             #endregion
 
-            #region employeeskill
-            _employeeSkillService = new EmployeeSkillService(new GcsContext());
-            _employeeSkillListViewModel = new EmployeeSkillListViewModel(_employeeSkillService);
+            #region Region
+            _regionService = new RegionService(new GcsContext());
+            _regionListViewModel = new RegionListViewModel(_regionService);
 
             #endregion
 
-
-            _regionService = new RegionService(new GcsContext());
 
             //DataContext = _employeeListViewModel;
             SkillsListGrid.DataContext = _skillListViewModel;
             custListGrid.DataContext = _customerListViewModel;
             emplListGrid.DataContext = _employeeListViewModel;
+            RegionsListGrid.DataContext = _regionListViewModel;
+            // EditEmpWin.DataContext = _employeeListViewModel.SelectedEmployee;
             //CREATE REGION LIST VIEW
 
         }

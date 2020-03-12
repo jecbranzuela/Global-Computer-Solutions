@@ -11,21 +11,26 @@ namespace App1.ViewModels
 {
     public class CustomerListViewModel
     {
-        private CustomerService _customerService;
+        private CustomerRegionService _customerRegionService;
         private string _searchText;
-
+        private CustomerViewModel _selectedCustomer;
         public ObservableCollection<CustomerViewModel> CustomerList { get; set; }
-        public CustomerViewModel SelectedCustomer { get; set; }
 
-        public CustomerListViewModel(CustomerService customerService)
+        public EditCustomerViewModel CreateEditCustomerViewModel()
         {
-            _customerService = customerService;
+            return new EditCustomerViewModel(_selectedCustomer,_customerRegionService);
+        }
+        public CustomerListViewModel(CustomerRegionService customerRegionService)
+        {
+            _customerRegionService = customerRegionService;
             CustomerList = new ObservableCollection<CustomerViewModel>(
-                _customerService.GetCustomers()
-                    .Select(c=> new CustomerViewModel(
-                        c.LastName,c.MiddleInitial,c.FirstName,c.PhoneNumber,c.RegionLink.Name,c.RegionId))
-                
-                );
+                _customerRegionService.CustomerService.GetCustomers()
+                    .Select(c=> new CustomerViewModel(c)));
+        }
+        public CustomerViewModel SelectedCustomer
+        {
+	        get => _selectedCustomer;
+	        set => _selectedCustomer = value;
         }
         public string SearchText
         {
@@ -40,13 +45,12 @@ namespace App1.ViewModels
         private void SearchCustomer(string searchString)
         {
             CustomerList.Clear();
-            var customers = _customerService.GetCustomers()
+            var customers = _customerRegionService.CustomerService.GetCustomers()
                 .Where(c => c.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
 
             foreach (var customer in customers)
             {
-                var customerModel = new CustomerViewModel(customer.LastName,customer.MiddleInitial,
-                    customer.FirstName,customer.PhoneNumber,customer.RegionLink.Name,customer.RegionId);
+                var customerModel = new CustomerViewModel(customer);
                 CustomerList.Add(customerModel);
             }
         }

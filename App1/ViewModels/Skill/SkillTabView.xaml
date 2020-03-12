@@ -41,8 +41,8 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
                 <TextBox
-                                    Text="{Binding Path=SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
-                                    VerticalAlignment="Bottom"
+                    Text="{Binding Path=SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
+                    VerticalAlignment="Bottom"
                             BorderThickness="0,0,0,3"
                             BorderBrush="Black"
                             FontWeight="Bold"
@@ -104,6 +104,8 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
+
+
         <Grid
                             DataContext="{Binding Path = SelectedSkill}"
                             Grid.ColumnSpan="5" 
@@ -170,61 +172,27 @@
 
 
         <Button
+            x:Name="btnEdit"
+            Click="BtnEdit_OnClick"
                             Content="Edit"
                             FontSize="15"
                             FontWeight="Bold"
-                            Grid.Row="3"
-                            Grid.Column="6"
+                            Grid.Row="1"
+                            Grid.Column="5"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center" 
                             Width="130">
         </Button>
-        <Button
-                            Content="Delete"
-                            FontSize="15"
-                            FontWeight="Bold"
-                            Grid.Row="4"
-                            Grid.Column="6"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Left" 
-                            Width="130" Margin="10,56,0,0">
-        </Button>
 
         <ListBox
             HorizontalContentAlignment="Stretch"
+            DisplayMemberPath="FullName"
             ItemsSource="{Binding Path=EmployeesWithSameSkill}"
                             BorderBrush="AliceBlue"
                             Grid.Column="2" 
                             Grid.ColumnSpan="4" 
                             Grid.RowSpan="3" 
                             Grid.Row="2" Margin="0,37,10,53">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                                        BorderBrush="DarkSlateBlue"
-                                        BorderThickness="0,0,0,3">
-                        <StackPanel>
-                            <!--<TextBlock
-                                                FontSize="10"
-                                                FontWeight="SemiBold"
-                                                Text="{Binding Path=EmployeeId}"/>-->
-                            <!--<TextBlock
-                                                FontSize="10"
-                                                Text="{Binding Path= LastName}"/>-->
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} , {1}">
-                                        <Binding Path="LastName"/>
-                                        <Binding Path="FirstName"/>
-
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 

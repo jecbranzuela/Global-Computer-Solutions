@@ -43,6 +43,14 @@ namespace App1.ViewModels.Skill
             
         }
 
+        public SkillViewModel(Entities.Skill skill)
+        {
+	        SkillId = skill.SkillId;
+	        Description = skill.Description;
+	        RateOfPay = skill.RateOfPay;
+
+        }
+
         public int SkillId
         {
             get => _skillId;

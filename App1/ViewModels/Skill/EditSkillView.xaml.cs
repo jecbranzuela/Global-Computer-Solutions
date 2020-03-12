@@ -8,26 +8,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace App1.ViewModels.Skill
 {
     /// <summary>
-    /// Interaction logic for SkillTabView.xaml
+    /// Interaction logic for EditSkillView.xaml
     /// </summary>
-    public partial class SkillTabView : UserControl
+    public partial class EditSkillView : Window
     {
-        public SkillTabView()
+	    private EditSkillViewModel _toEditSKill;
+        private EditSkillView()
         {
             InitializeComponent();
         }
 
+        public EditSkillView(EditSkillViewModel skillToEdit):this()
+        {
+	        DataContext = _toEditSKill = skillToEdit;
+        }
+
+        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            var skillListContext = (SkillListViewModel)DataContext;
-            var edSkill = new EditSkillView(skillListContext.EditSkillViewModel());
-            edSkill.Show();
+            _toEditSKill.Edit();
+            this.Close();
         }
     }
 }

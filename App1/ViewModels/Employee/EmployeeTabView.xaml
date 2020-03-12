@@ -258,7 +258,9 @@
                                     FontWeight="Bold"/>
             </Button>
             <Button
-                                BorderThickness="2"
+                x:Name="btnEditEmployee"
+                Click="BtnEditEmployee_OnClick"
+                BorderThickness="2"
                                 Background="White"
                                 Height="30"
                                 Grid.Column="1"
