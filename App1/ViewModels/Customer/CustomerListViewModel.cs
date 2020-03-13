@@ -48,11 +48,7 @@ namespace App1.ViewModels
             var customers = _customerRegionService.CustomerService.GetCustomers()
                 .Where(c => c.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
 
-            foreach (var customer in customers)
-            {
-                var customerModel = new CustomerViewModel(customer);
-                CustomerList.Add(customerModel);
-            }
+            foreach (var customer in customers) CustomerList.Add(new CustomerViewModel(customer));
         }
 
     }

@@ -32,5 +32,10 @@ namespace App1.ViewModels.Project
         {
             throw new NotImplementedException();
         }
+
+        private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+	        throw new NotImplementedException();
+        }
     }
 }

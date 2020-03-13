@@ -21,10 +21,10 @@ namespace App1.ViewModels.Employee
 			LastName = employee.LastName;
 			MiddleInitial = employee.MiddleInitial;
 			FirstName = employee.FirstName;
+			RegionId = employee.RegionId;
 			Region = employee.RegionLink.Name;
 			DateOfHire = employee.DateOfHire;
-			RegionId = employee.RegionId;
-			FullName = $"{_lastName},  {_firstName}";
+			FullName = $"{_lastName},  {_firstName}  {_middleInitial}.";
 		}
 
 		public EmployeeViewModel()

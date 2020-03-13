@@ -48,7 +48,7 @@ namespace App1.ViewModels.Customer
 	        PhoneNumber = customer.PhoneNumber;
 	        Region = customer.RegionLink.Name;
 	        RegionId = customer.RegionId;
-	        FullName = $"{_lastName},  {_firstName}";
+	        FullName = $"{_lastName},  {_firstName}  {_middleInitial}.";
 
 
         }

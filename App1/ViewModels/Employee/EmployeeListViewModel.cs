@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using App1.ViewModels.Employee;
 using App1.ViewModels.Skill;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer;
 
 namespace App1.ViewModels
@@ -22,11 +23,13 @@ namespace App1.ViewModels
 
 		public EmployeeListViewModel(EmployeeRegionService employeeRegionService)
 		{
-			EmployeeSkills = new ObservableCollection<SkillViewModel>();
+			EmployeeSkills = new ObservableCollection<SkillViewModel>();	
 			_employeeRegionService = employeeRegionService;
 			EmployeeList = new ObservableCollection<EmployeeViewModel>(
 			employeeRegionService.EmployeeService.GetEmployees()
-			.Select(c => new EmployeeViewModel(c)));
+			.Include(c=>c.RegionLink)
+			.Select(c => new EmployeeViewModel(c))
+			);
 		}
 
 

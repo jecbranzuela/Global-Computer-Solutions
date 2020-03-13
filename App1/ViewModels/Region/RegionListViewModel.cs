@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using App1.ViewModels.Customer;
 using App1.ViewModels.Employee;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer;
 
 namespace App1.ViewModels.Region

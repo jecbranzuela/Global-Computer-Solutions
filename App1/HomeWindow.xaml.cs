@@ -53,9 +53,21 @@ namespace App1
 
         #endregion
 
+        #region MyRegion
+
         private RegionListViewModel _regionListViewModel;
         private RegionService _regionService;
-        
+
+        #endregion
+
+        #region MyRegion
+
+        private ProjectListViewModel _projectListViewModel;
+        private ProjectService _projectService;
+
+        #endregion
+
+
         public HomeWindow()
         {
             InitializeComponent();
@@ -88,8 +100,16 @@ namespace App1
 
             #endregion
 
+            #region Project
+            _projectService = new ProjectService(new GcsContext());
+            _projectListViewModel = new ProjectListViewModel(_projectService);
+            
+
+            #endregion
+
 
             //DataContext = _employeeListViewModel;
+            ProjectsListGrid.DataContext = _projectListViewModel;
             SkillsListGrid.DataContext = _skillListViewModel;
             custListGrid.DataContext = _customerListViewModel;
             emplListGrid.DataContext = _employeeListViewModel;

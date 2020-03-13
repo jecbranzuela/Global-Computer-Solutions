@@ -23,19 +23,21 @@ namespace ServiceLayer
             return _context.Regions
                     .Include(c=>c.Employees)
                     .ThenInclude(c=>c.RegionLink)
-                ;
+            ;
         }
 
         public IQueryable<Employee> GetEmployees(int regionId)
         {
             return _context.Employees
-                .Where(c => c.RegionId == regionId);
+                .Where(c => c.RegionId == regionId)
+				 .Include(c=>c.RegionLink);
         }
 
         public IQueryable<Customer> GetCustomers(int regionId)
         {
-            return _context.Customers
-                .Where(c => c.RegionId == regionId);
+	        return _context.Customers
+	        .Where(c => c.RegionId == regionId)
+	        .Include(c => c.RegionLink);
         }
 
         //public IList<Employee> GetEmp(int regionId)
