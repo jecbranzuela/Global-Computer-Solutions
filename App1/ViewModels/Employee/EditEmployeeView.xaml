@@ -116,7 +116,8 @@
             </ComboBox>
 
             <DatePicker
-                Text="{Binding Path=DateOfHire}"
+                SelectedDate="{Binding DateOfHire,Mode=TwoWay}"
+                DisplayDate="{Binding Path=DateOfHire}"
                 Margin="0,30,30,0"
                 Width="170" 
                 Height="30"

@@ -46,7 +46,14 @@ namespace App1.ViewModels
         {
             CustomerList.Clear();
             var customers = _customerRegionService.CustomerService.GetCustomers()
-                .Where(c => c.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
+                .Where(c => c.FirstName.Contains(searchString) 
+                            || c.LastName.Contains(searchString)
+                            ||c.PhoneNumber.ToString().Contains(searchString)
+                            ||c.MiddleInitial.Contains(searchString)
+                            ||c.RegionLink.Name.Contains(searchString)
+                            
+                            
+                            );
 
             foreach (var customer in customers) CustomerList.Add(new CustomerViewModel(customer));
         }

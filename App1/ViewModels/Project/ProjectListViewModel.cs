@@ -10,20 +10,20 @@ namespace App1.ViewModels.Project
 {
     public class ProjectListViewModel
     {
-	    private ProjectService _projectService;
+	    private ProjCustEmpRegService _projCustEmpRegService;
 	    private string _searchText;
 	    private ProjectViewModel _selectedProject;
-	    public ObservableCollection<ProjectViewModel> ProjectList { get; set; }
+	    public ObservableCollection<ProjectViewModel> ProjectList { get;}
 
-	    public ProjectListViewModel(ProjectService projectService)
+	    public ProjectListViewModel(ProjCustEmpRegService projCustEmpRegService)
 	    {
-		    _projectService = projectService;
+		    _projCustEmpRegService = projCustEmpRegService;
 			ProjectList = new ObservableCollection<ProjectViewModel>(
-			_projectService.GetProjects()
+			_projCustEmpRegService.ProjectService.GetProjects()
 			.Select(c=> new ProjectViewModel(c))
 			);
 	    }
-		private ProjectViewModel SelectedProject
+		public ProjectViewModel SelectedProject
 		{
 			get => _selectedProject;
 			set => _selectedProject = value;
@@ -42,10 +42,15 @@ namespace App1.ViewModels.Project
 	    private void SearchProject(string searchString)
 	    {
 			ProjectList.Clear();
-			var projects = _projectService.GetProjects()
+			var projects = _projCustEmpRegService.ProjectService.GetProjects()
 			.Where(c => c.ProjectId.ToString().Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
 
 			foreach (var project in projects) ProjectList.Add(new ProjectViewModel(project));
+	    }
+
+	    public EditProjectViewModel CreateEditProjectViewModel()
+	    {
+			return new EditProjectViewModel(_selectedProject,_projCustEmpRegService);
 	    }
     }
 }

@@ -20,7 +20,6 @@ namespace App1.ViewModels.Employee
         public string MiddleInitial { get; set; }
         public string FirstName { get; set; }
         public DateTime DateOfHire { get; set; }
-        public string Region { get; set; }
 
         public EditEmployeeViewModel(EmployeeViewModel employeeModel, 
         EmployeeRegionService employeeRegionService)
@@ -37,11 +36,10 @@ namespace App1.ViewModels.Employee
 
         private void CopyEditableFields(EmployeeViewModel employeeModel)
         {
-            LastName = employeeModel.LastName;
+           LastName = employeeModel.LastName;
             MiddleInitial = employeeModel.MiddleInitial;
             FirstName = employeeModel.FirstName;
             DateOfHire = employeeModel.DateOfHire;
-            Region = employeeModel.Region;
         }
 
         public void Edit()
@@ -56,14 +54,16 @@ namespace App1.ViewModels.Employee
                 _employeeService.EditEmployee(
                 AssociatedEmployeeModel.EmployeeId,AssociatedEmployeeModel.RegionId,
                 AssociatedEmployeeModel.FirstName,AssociatedEmployeeModel.LastName,
-                AssociatedEmployeeModel.MiddleInitial);
+                AssociatedEmployeeModel.MiddleInitial,AssociatedEmployeeModel.DateOfHire
+                
+                );
             }
             else
             {
                 _employeeService.EditEmployee(
-                AssociatedEmployeeModel.EmployeeId,AssociatedEmployeeModel.RegionId,
+                AssociatedEmployeeModel.EmployeeId,SelectedRegion.RegionId,
                 AssociatedEmployeeModel.FirstName,AssociatedEmployeeModel.LastName,
-                AssociatedEmployeeModel.MiddleInitial
+                AssociatedEmployeeModel.MiddleInitial,AssociatedEmployeeModel.DateOfHire
                 );
 
                 AssociatedEmployeeModel.Region = SelectedRegion.Name;

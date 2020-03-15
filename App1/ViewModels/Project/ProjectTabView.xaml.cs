@@ -25,17 +25,18 @@ namespace App1.ViewModels.Project
 
         private void BtnShowProjectSchedulesList_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void BtnShowBills_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
         {
-	        throw new NotImplementedException();
+	        var context = (ProjectListViewModel)DataContext;
+
+            var editProjWin = new EditProjectWindow(context.CreateEditProjectViewModel());
+            editProjWin.Show();
         }
     }
 }

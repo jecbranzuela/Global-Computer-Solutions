@@ -55,6 +55,7 @@ namespace App1.ViewModels
 
 		private void LoadEmployeeSkills()
 		{
+			if (_selectedEmployee == null) return;
 			var skills = _employeeRegionService.EmployeeService.GetSkills(SelectedEmployee.EmployeeId)
 			.OrderBy(c => c.Description);
 
@@ -68,11 +69,12 @@ namespace App1.ViewModels
 			EmployeeList.Clear();
 
 			var employees = _employeeRegionService.EmployeeService.GetEmployees()
-			.Where(c => c.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
-			//.Where(c => c.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
-			//|| c.LastName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
-			//|| c.MiddleInitial.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
-			//);
+			.Where(c => c.FirstName.Contains(searchString)
+			||c.RegionLink.Name.Contains(searchString)
+			||c.MiddleInitial.Contains(searchString)
+			||c.LastName.Contains(searchString)
+			||c.EmployeeId.ToString().Contains(searchString)
+			);
 
 			foreach (var employee in employees)
 			{

@@ -45,7 +45,7 @@ namespace ServiceLayer
 				
 	        return skillList;
         }
-        public void EditEmployee(int employeeId, int regionId, string firstName, string lastName, string middleInitial)
+        public void EditEmployee(int employeeId, int regionId, string firstName, string lastName, string middleInitial,DateTime dateOfHire)
         {
             //using var context = new GcsContext();
             var employee = _context.Employees.Find(employeeId);
@@ -53,8 +53,8 @@ namespace ServiceLayer
             employee.FirstName = firstName;
             employee.LastName = lastName;
             employee.MiddleInitial = middleInitial;
+            employee.DateOfHire = dateOfHire;
             employee.RegionLink = _context.Regions.First(c => c.RegionId == employee.RegionId);
-
             _context.SaveChanges();
         }
 

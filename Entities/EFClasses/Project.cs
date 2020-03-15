@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 
 namespace Entities
@@ -20,7 +21,7 @@ namespace Entities
         public ICollection<Bill> Bills { get; set; }
 
         //foreign keys
-        public int EmployeeId { get; set; } //manager
+        public int? EmployeeId { get; set; } //manager
         public Employee EmployeeLink { get; set; }
         public int CustomerId { get; set; }
         public Customer CustomerLink { get; set; }

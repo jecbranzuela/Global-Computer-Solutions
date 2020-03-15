@@ -20,7 +20,6 @@ namespace App1.ViewModels.Customer
 	    public string MiddleInitial { get; set; }
 	    public string FirstName { get; set; }
 	    public int PhoneNumber { get; set; }
-	    public string Region { get; set; }
 
 	    public EditCustomerViewModel(CustomerViewModel customerModel,
 	    CustomerRegionService customerRegionService)
@@ -40,7 +39,6 @@ namespace App1.ViewModels.Customer
 		    MiddleInitial = customerModel.MiddleInitial;
 		    FirstName = customerModel.FirstName;
 		    PhoneNumber = customerModel.PhoneNumber;
-		    Region = customerModel.Region;
 	    }
 
 	    public void Edit()
@@ -61,7 +59,7 @@ namespace App1.ViewModels.Customer
 		    else
 		    {
 				_customerService.EditCustomer(
-				AssociatedCustomerModel.CustomerId, AssociatedCustomerModel.RegionId,
+				AssociatedCustomerModel.CustomerId, SelectedRegion.RegionId,
 				AssociatedCustomerModel.FirstName, AssociatedCustomerModel.MiddleInitial,
 				AssociatedCustomerModel.LastName, AssociatedCustomerModel.PhoneNumber
 				);

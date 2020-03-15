@@ -21,5 +21,10 @@ namespace ServiceLayer
         {
             return _context.ProjectSchedules;
         }
+
+        //public IList<Employee> GetAvailableEmployeesForTask()
+        //{
+        //    var tasks = 
+        //}
     }
 }

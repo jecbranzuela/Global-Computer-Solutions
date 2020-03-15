@@ -53,19 +53,21 @@ namespace App1
 
         #endregion
 
-        #region MyRegion
+        #region Region
 
         private RegionListViewModel _regionListViewModel;
         private RegionService _regionService;
 
         #endregion
 
-        #region MyRegion
+        #region project
 
         private ProjectListViewModel _projectListViewModel;
         private ProjectService _projectService;
 
         #endregion
+
+        private ProjCustEmpRegService _projCustEmpRegService;
 
 
         public HomeWindow()
@@ -100,13 +102,16 @@ namespace App1
 
             #endregion
 
+
+
+            _projCustEmpRegService = new ProjCustEmpRegService(new GcsContext());
+
             #region Project
             _projectService = new ProjectService(new GcsContext());
-            _projectListViewModel = new ProjectListViewModel(_projectService);
-            
+            _projectListViewModel = new ProjectListViewModel(_projCustEmpRegService);
+
 
             #endregion
-
 
             //DataContext = _employeeListViewModel;
             ProjectsListGrid.DataContext = _projectListViewModel;
@@ -168,7 +173,7 @@ namespace App1
 
         private void BtnNewProj_OnClick(object sender, RoutedEventArgs e)
         {
-            var addNewProj = new AddProjectWindow();
+            var addNewProj = new AddProjectWindow(_projectListViewModel,_projCustEmpRegService);
             addNewProj.Show();
         }
 

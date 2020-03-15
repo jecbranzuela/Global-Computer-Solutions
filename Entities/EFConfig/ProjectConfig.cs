@@ -19,6 +19,7 @@ namespace GCSClasses.EFConfig
 
             //pwede dili sa ibutang sa pag create sa project, pwede at a later date na ibutang
             builder.Property(c => c.ActualEndDate).IsRequired(false);
+            builder.Property(c => c.EmployeeId).IsRequired(false);
             builder.Property(c => c.ActualStartDate).IsRequired(false);
             builder.Property(c => c.ActualCost).IsRequired(false);
 

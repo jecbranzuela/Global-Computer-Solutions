@@ -12,8 +12,6 @@ namespace App1.ViewModels.Skill
         private SkillService _skillService;
         private readonly SkillListViewModel _skillListViewModel;
         
-        public string Description { get; set; }
-        public int RateOfPay { get; set; }
         public SkillViewModel AddSkillModel { get; private set; }
 
         public AddSkillViewModel(SkillService skillService,

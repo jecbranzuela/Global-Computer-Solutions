@@ -26,6 +26,13 @@ namespace App1.ViewModels.Project
 
 		private int _projectId;
 
+		public ProjectViewModel()
+		{
+			Date = DateTime.Now;
+			EstimatedStartDate = DateTime.Now;
+			EstimatedEndDate = DateTime.Now;
+		}
+
 		public ProjectViewModel(Entities.Project project)
 		{
 			ProjectId = project.ProjectId;
@@ -40,8 +47,9 @@ namespace App1.ViewModels.Project
 			CustomerId = project.CustomerId;
 			CustomerName = new CustomerViewModel(project.CustomerLink).FullName;
 			EmployeeId = project.EmployeeId;
-			EmployeeName = new EmployeeViewModel(project.EmployeeLink).FullName;
 			Region = project.CustomerLink.RegionLink.Name;
+
+			if (project.EmployeeLink != null) EmployeeName = new EmployeeViewModel(project.EmployeeLink).FullName; //optional ang manager sa newly-created project.. dili madetermine diretso kung kinsa ang muhandle
 		}
 
 		public string Region

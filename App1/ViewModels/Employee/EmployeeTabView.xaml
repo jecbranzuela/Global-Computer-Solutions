@@ -39,18 +39,14 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
                 <TextBox
-                                    Text="{Binding Path=SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
-                                    VerticalAlignment="Bottom"
+                                    Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
                             BorderThickness="0,0,0,3"
                             BorderBrush="Black"
                             FontWeight="Bold"
                             FontSize="15"
                             Width="180"
                             />
-                <Button
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Center"
-                            Grid.Column="1" 
+                <Button 
                             Width="160"
                             Height="40"
                             Background="White"

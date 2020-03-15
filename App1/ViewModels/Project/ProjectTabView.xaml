@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:App1.ViewModels.Project"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="600">
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -13,61 +13,60 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel>
-            <ListBox
+        <ListBox
+            BorderThickness="1.5"
+            BorderBrush="Black"
                 HorizontalContentAlignment="Stretch"
                 ItemsSource="{Binding Path=ProjectList}"
                 SelectedItem="{Binding Path=SelectedProject}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border
                             BorderBrush="DarkSlateBlue"
                             BorderThickness="0,0,0,3">
-                            <StackPanel>
-                                <TextBlock
+                        <StackPanel>
+                            <TextBlock
                                     FontSize="10"
                                     FontWeight="SemiBold"
                                     Text="{Binding Path= ProjectId}" />
-                                <TextBlock
+                            <TextBlock
                                     FontSize="10"
                                     Text="{Binding Path= CustomerName}" />
-                                <TextBlock
+                            <TextBlock
                                     FontSize="10"
                                     Text="{Binding Path= Description}" />
-                            </StackPanel>
+                        </StackPanel>
 
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-            <Grid 
-                DataContext="{Binding Path =SelectedProject}"
-                MinWidth="520"
+        <Grid 
+            DataContext="{Binding Path = SelectedProject}"
                 Grid.Column="1"
                 Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="0"
                     VerticalAlignment="Bottom"
@@ -75,7 +74,8 @@
                     Text="Customer Name: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
+                x:Name="sampleBlock"
                     Grid.Column="1"
                     Grid.Row="0"
                     VerticalAlignment="Bottom"
@@ -83,7 +83,7 @@
                     Text="{Binding Path=CustomerName}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="1"
                     VerticalAlignment="Bottom"
@@ -91,7 +91,7 @@
                     Text="Manager: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="1"
                     VerticalAlignment="Bottom"
@@ -99,7 +99,7 @@
                     Text="{Binding Path=EmployeeName}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="2"
                     VerticalAlignment="Bottom"
@@ -115,7 +115,7 @@
                     Text="{Binding Path=Region}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="3"
                     VerticalAlignment="Bottom"
@@ -123,7 +123,7 @@
                     Text="Budget: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="3"
                     VerticalAlignment="Bottom"
@@ -131,7 +131,7 @@
                     Text="{Binding Path=Budget}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="4"
                     VerticalAlignment="Bottom"
@@ -139,7 +139,7 @@
                     Text="Contract Sign Date: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="4"
                     VerticalAlignment="Bottom"
@@ -147,7 +147,7 @@
                     Text="{Binding Path=Date}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="5"
                     VerticalAlignment="Bottom"
@@ -155,7 +155,7 @@
                     Text="Description: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="5"
                     VerticalAlignment="Bottom"
@@ -163,7 +163,7 @@
                     Text="{Binding Path=Description}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="6"
                     VerticalAlignment="Bottom"
@@ -171,7 +171,7 @@
                     Text="Estimated Start Date: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="6"
                     VerticalAlignment="Bottom"
@@ -179,7 +179,7 @@
                     Text="{Binding Path=EstimatedStartDate}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="7"
                     VerticalAlignment="Bottom"
@@ -187,7 +187,7 @@
                     Text="Estimated End Date: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="7"
                     VerticalAlignment="Bottom"
@@ -195,7 +195,7 @@
                     Text="{Binding Path=EstimatedEndDate}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="8"
                     VerticalAlignment="Bottom"
@@ -203,7 +203,7 @@
                     Text="Actual Start Date: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="8"
                     VerticalAlignment="Bottom"
@@ -211,7 +211,7 @@
                     Text="{Binding Path=ActualStartDate}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="9"
                     VerticalAlignment="Bottom"
@@ -219,7 +219,7 @@
                     Text="Actual End Date: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="9"
                     VerticalAlignment="Bottom"
@@ -227,7 +227,7 @@
                     Text="{Binding Path=ActualEndDate}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="0"
                     Grid.Row="10"
                     VerticalAlignment="Bottom"
@@ -235,7 +235,7 @@
                     Text="Actual Cost: "
                     FontWeight="Bold"
                     FontSize="15"/>
-                <TextBlock
+            <TextBlock
                     Grid.Column="1"
                     Grid.Row="10"
                     VerticalAlignment="Bottom"
@@ -243,35 +243,41 @@
                     Text="{Binding Path=ActualCost}"
                     FontWeight="Bold"
                     FontSize="15"/>
-                <Button
+            <Button
                     Click="BtnEdit_OnClick"
                     x:Name="btnEdit"
-                    Grid.Column="2"
-                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.Row="11"
                     Content="Edit"
                     FontSize="15"
                     FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
                     HorizontalContentAlignment="Center"
                 />
 
             <Button
                     Click="BtnShowBills_OnClick"
                     x:Name="btnShowBills"
-                    Grid.Column="2"
-                    Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.Row="11"
                     Content="Bills"
                     FontSize="15"
                     FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     HorizontalContentAlignment="Center"
                 />
-                <Button
+            <Button
                     Click="BtnShowProjectSchedulesList_OnClick"
                     x:Name="BtnShowProjectSchedulesList"
-                    Grid.Column="2"
-                    Grid.Row="10"
+                    Grid.Column="1"
+                    Grid.Row="11"
                     Content="Schedules"
                     FontSize="15"
                     FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
                     HorizontalContentAlignment="Center"
                 />
 
