@@ -198,17 +198,6 @@ namespace App1
 
         }
 
-        private void BtnShowProjectSchedulesList_OnClick(object sender, RoutedEventArgs e)
-        {
-            var projSched = new ProjectSchedulesWindow();
-            projSched.Show();
-        }
-
-        private void BtnShowBills_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void BtnHome_OnClick(object sender, RoutedEventArgs e)
         {
             HideOtherGrids();

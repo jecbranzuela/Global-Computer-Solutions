@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using App1.ViewModels.ProjectSchedule;
 
 namespace App1.ViewModels.Project
 {
@@ -25,6 +26,8 @@ namespace App1.ViewModels.Project
 
         private void BtnShowProjectSchedulesList_OnClick(object sender, RoutedEventArgs e)
         {
+            var Sched = new ProjectScheduleTab();
+            Sched.Show();
         }
 
         private void BtnShowBills_OnClick(object sender, RoutedEventArgs e)
