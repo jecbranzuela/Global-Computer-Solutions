@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using App1.ViewModels.ProjectSchedule;
+using ServiceLayer;
 
 namespace App1.ViewModels.Project
 {
@@ -26,8 +27,10 @@ namespace App1.ViewModels.Project
 
         private void BtnShowProjectSchedulesList_OnClick(object sender, RoutedEventArgs e)
         {
-            var Sched = new ProjectScheduleTab();
-            Sched.Show();
+	        var context = (ProjectListViewModel) DataContext;
+	       // var context1 = (ProjCustEmpRegService) DataContext;
+	        var showSched = new ProjectScheduleTab(/*context1,*/context.ProjectScheduleTaskList());
+            showSched.Show();
         }
 
         private void BtnShowBills_OnClick(object sender, RoutedEventArgs e)

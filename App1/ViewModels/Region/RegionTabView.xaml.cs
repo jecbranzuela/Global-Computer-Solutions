@@ -24,5 +24,20 @@ namespace App1.ViewModels.Region
             lbCust.Items.Clear();
             lbEmp.Items.Clear();
         }
+
+        private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
+        {
+	        var RegionListContext = (RegionListViewModel)DataContext;
+            var addRegion = new AddRegionView(RegionListContext,RegionListContext.ReturnContext());
+            addRegion.Show();
+        }
+
+        private void BtnEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+	        var RegionListContext = (RegionListViewModel)DataContext;
+            var edRegion = new EditRegionView(RegionListContext.EditRegionViewModel());
+            edRegion.Show();
+            //var edRegion 
+        }
     }
 }

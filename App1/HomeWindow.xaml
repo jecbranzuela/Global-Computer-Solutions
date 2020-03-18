@@ -10,9 +10,12 @@
         xmlns:employee="clr-namespace:App1.ViewModels.Employee"
         xmlns:customer="clr-namespace:App1.ViewModels.Customer"
         mc:Ignorable="d"
+        WindowState="Normal"
         WindowStartupLocation="CenterOwner"
-        Title="HomeWindow" Height="1080" Width="1920">
-    <Grid>
+        Title="HomeWindow">
+    <Grid
+        x:Name="MainGrid"
+        >
         <DockPanel>
             <Menu DockPanel.Dock="Top"
                 Background="AliceBlue"

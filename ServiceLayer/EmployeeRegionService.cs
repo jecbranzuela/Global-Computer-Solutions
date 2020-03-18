@@ -12,11 +12,17 @@ namespace ServiceLayer
     {
 	    public EmployeeService EmployeeService { get;}
 	    public RegionService RegionService { get;}
+		public SkillService SkillService { get; }
+		public EmployeeSkillService EmployeeSkillService { get; }
 
 	    public EmployeeRegionService(GcsContext context)
 	    {
 		    EmployeeService = new EmployeeService(context);
 		    RegionService = new RegionService(context);
-	    }
+		    SkillService = new SkillService(context);
+		    EmployeeSkillService = new EmployeeSkillService(context);
+
+
+		}
     }
 }

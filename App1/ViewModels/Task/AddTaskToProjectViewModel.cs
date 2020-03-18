@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using App1.Annotations;
+using GCSClasses.EFClasses;
 
-namespace App1.ViewModels.ProjectSchedule
+namespace App1.ViewModels.Task
 {
-    public class ProjectScheduleViewModel : INotifyPropertyChanged
+    public class AddTaskToProjectViewModel : INotifyPropertyChanged
     {
-
-		//iisa ra guro ka table a
 	    public event PropertyChangedEventHandler PropertyChanged;
 
 	    [NotifyPropertyChangedInvocator]
@@ -20,5 +20,12 @@ namespace App1.ViewModels.ProjectSchedule
 	    {
 		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	    }
+
+	    public ObservableCollection<TaskViewModel> TaskList { get; set; }
+	    private TaskViewModel _selectedTask;
+
+	    //public TaskViewModel SelectedTask
+	    //{
+	    //}
     }
 }

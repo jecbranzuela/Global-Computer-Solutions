@@ -59,5 +59,12 @@ namespace ServiceLayer
 			var project = _context.Projects.Find(projectId);
 			project.IsDeleted = true;
 		}
+
+		public IQueryable<ProjectScheduleTask> GetProjectScheduleTasks(int projectId)
+		{
+			return _context.ProjectScheduleTasks
+			.Where(c => c.ProjectId == projectId)
+			.Include(c=>c.TaskClassLink);
+		}
 	}
 }

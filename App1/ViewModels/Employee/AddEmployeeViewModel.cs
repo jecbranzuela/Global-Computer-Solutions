@@ -14,10 +14,10 @@ namespace App1.ViewModels.Employee
         private EmployeeService _employeeService;
         private RegionService _regionService;
         private readonly EmployeeListViewModel _employeeListViewModel;
-        public string FirstName { get; set; }
-        public string MiddleInitial { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfHire { get; set; } = DateTime.Now;
+        //public string FirstName { get; set; }
+        //public string MiddleInitial { get; set; }
+        //public string LastName { get; set; }
+        //public DateTime DateOfHire { get; set; }
         public Entities.Region SelectedRegion { get; set; }
         public ObservableCollection<Entities.Region> Regions { get; }
 
@@ -29,7 +29,7 @@ namespace App1.ViewModels.Employee
             _employeeService = employeeService;
             _regionService = regionService;
             _employeeListViewModel = employeeListViewModel;
-
+           // DateOfHire = DateTime.Now;
             Regions = new ObservableCollection<Entities.Region>(_regionService.GetRegions());
 
             SelectedRegion = Regions.First();
@@ -45,6 +45,7 @@ namespace App1.ViewModels.Employee
             toAddEmployee.RegionId = SelectedRegion.RegionId;
             _employeeService.AddEmployee(toAddEmployee);
             _employeeListViewModel.EmployeeList.Insert(0,AddEmployeeModel);
+            AddEmployeeModel.RegionId = SelectedRegion.RegionId;
             AddEmployeeModel.EmployeeId = toAddEmployee.EmployeeId;
             AddEmployeeModel.Region = SelectedRegion.Name;
 

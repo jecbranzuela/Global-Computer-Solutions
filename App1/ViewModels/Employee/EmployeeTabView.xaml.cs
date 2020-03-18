@@ -32,5 +32,12 @@ namespace App1.ViewModels.Employee
 	        var edEmp = new EditEmployeeView(employeeListContext.CreateEditEmployeeViewModel());
             edEmp.Show();
         }
+
+        private void BtnShowEmpSkill_OnClick(object sender, RoutedEventArgs e)
+        {
+	        var employeeListContext = (EmployeeListViewModel)DataContext;
+            var emps = new EmployeeSkillsView(employeeListContext.EmpSkill());
+            emps.Show();
+        }
     }
 }

@@ -28,21 +28,21 @@ namespace App1
     {
 	    #region EmployeeRegion
 
-	    private EmployeeRegionService employeeRegionService;
-	    private CustomerRegionService customerRegionService;
+	    //private EmployeeRegionService employeeRegionService;
+	    //private CustomerRegionService customerRegionService;
 
 	    #endregion
         #region employee
 
         private EmployeeListViewModel _employeeListViewModel;
-        private EmployeeService _employeeService;
+       // private EmployeeService _employeeService;
 
         #endregion
 
         #region customer
 
         private CustomerListViewModel _customerListViewModel;
-        private CustomerService _customerService;
+       // private CustomerService _customerService;
 
         #endregion
 
@@ -74,37 +74,40 @@ namespace App1
         {
             InitializeComponent();
 
-            employeeRegionService = new EmployeeRegionService(new GcsContext());
-            customerRegionService = new CustomerRegionService(new GcsContext());
+            _projCustEmpRegService = new ProjCustEmpRegService(new GcsContext());
+
+            //employeeRegionService = new EmployeeRegionService(new GcsContext());
+            //customerRegionService = new CustomerRegionService(new GcsContext());
 
             #region employee
 
-            _employeeService = new EmployeeService(new GcsContext());
-            _employeeListViewModel = new EmployeeListViewModel(employeeRegionService);
+            //_employeeService = new EmployeeService(new GcsContext());
+            _employeeListViewModel = new EmployeeListViewModel(_projCustEmpRegService.EmployeeRegionService);
 
             #endregion
 
             #region customer
-            _customerService = new CustomerService(new GcsContext());
-            _customerListViewModel = new CustomerListViewModel(customerRegionService);
+           //_customerService = _projCustEmpRegService.CustomerRegionService
+            _customerListViewModel = new CustomerListViewModel(_projCustEmpRegService.CustomerRegionService);
 
             #endregion
 
             #region skill
-            _skillService = new SkillService(new GcsContext());
+
+            _skillService = _projCustEmpRegService.SkillService;
             _skillListViewModel = new SkillListViewModel(_skillService);
 
             #endregion
 
             #region Region
-            _regionService = new RegionService(new GcsContext());
+
+            _regionService = _projCustEmpRegService.EmployeeRegionService.RegionService;
             _regionListViewModel = new RegionListViewModel(_regionService);
 
             #endregion
 
 
 
-            _projCustEmpRegService = new ProjCustEmpRegService(new GcsContext());
 
             #region Project
             _projectService = new ProjectService(new GcsContext());
@@ -132,8 +135,8 @@ namespace App1
 
         private void BtnNewEmp_OnClick(object sender, RoutedEventArgs e)
         {
-            var addEmpView = new AddEmployeeView(_employeeListViewModel, _employeeService, _regionService);
-            addEmpView.Show();
+            var addEmpView = new AddEmployeeView(_employeeListViewModel, _projCustEmpRegService.EmployeeRegionService);
+            addEmpView.ShowDialog();
         }
 
         private void BtnEmpList_OnClick(object sender, RoutedEventArgs e)
@@ -167,7 +170,7 @@ namespace App1
 
         private void BtnNewCust_OnClick(object sender, RoutedEventArgs e)
         {
-            var addNewCustWin = new AddCustomerView(_customerListViewModel,_customerService,_regionService);
+            var addNewCustWin = new AddCustomerView(_customerListViewModel,_projCustEmpRegService.CustomerRegionService);
             addNewCustWin.Show();
         }
 
@@ -188,6 +191,7 @@ namespace App1
         {
             HideOtherGrids();
             ProjectsListGrid.Visibility = Visibility.Visible;
+            
         }
 
         private void RegionSettings(object sender, RoutedEventArgs e)
@@ -200,8 +204,8 @@ namespace App1
 
         private void BtnHome_OnClick(object sender, RoutedEventArgs e)
         {
-            HideOtherGrids();
-            HomeGrid.Visibility = Visibility.Visible;
+	        HomeGrid.Visibility = Visibility.Visible;
         }
+
     }
 }

@@ -4,19 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App1.ViewModels.Region"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+>
     <Grid
-        HorizontalAlignment="Left"
-                        Width="900">
+    Height="800"
+    Width="1500"
+    HorizontalAlignment="Left"
+    Background="White"
+    Margin="10,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -24,136 +27,108 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox 
-            ItemsSource="{Binding Path=RegionList}"
-            SelectedItem="{Binding Path=SelectedRegion}"
-            DisplayMemberPath="Name"
-            BorderBrush="AliceBlue"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Grid.RowSpan="5" Margin="10,75,10,20"
-                            />
         <Button
-                            Margin="0,35,0,106"
-                            HorizontalAlignment="Center"
-                            Grid.Column="1" 
-                            Width="160"
-                            Background="White"
-                            BorderThickness="1.5"
-                            BorderBrush="AliceBlue">
-            <StackPanel Orientation="Horizontal">
-                <Image
-                                    Margin="0,0,0,0"
-                                    Source="img/searchIcon.png"
-                                    VerticalAlignment="Center"
-                                    Width="30" 
-                                    Height="30"/>
-                <TextBlock
-                                    Margin="0,0,0,0"
-                                    Text="Search Region"
-                                    FontSize="10"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    FontWeight="Bold"/>
-            </StackPanel>
-        </Button>
+            x:Name="btnEdit"
+            Click="BtnEdit_OnClick"
+            Grid.Column="4"
+            Content="Edit Region"
+            VerticalAlignment="Center"
+            BorderThickness="0,0,3,0"
+            Background="AliceBlue"
+            FontSize="15"
+            FontWeight="SemiBold"
+            />
+        <Button
+            x:Name="btnAdd"
+            Click="BtnAdd_OnClick"
+            VerticalAlignment="Center"
+            Grid.Column="5"
+            Content="Add Region"
+            BorderThickness="3,0,0,0"
+            Background="AliceBlue"
+            FontSize="15"
+            FontWeight="SemiBold"
+            />
+        <TextBlock
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        FontSize="30"
+        FontWeight="Bold"
+        Text="Available Regions"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        />
 
         <TextBox
-                            Grid.Column="0" Margin="10,35,0,106"
-                            BorderThickness="0,0,0,3"
-                            BorderBrush="Black"
-                            FontWeight="SemiBold"
-                            FontSize="15"
-                            VerticalContentAlignment="Bottom"
-                            HorizontalContentAlignment="Left"
-                        />
-        <TextBlock
-                            Text="Employees in this Region"
-                            Grid.Column="2"
-                            FontWeight="Bold"
-                            FontSize="15" 
-                            Grid.ColumnSpan="4"
-                            Margin="24,143,34,0"/>
-        <TextBlock
-                            Text="Customers in this Region"
-                            Grid.Column="2"
-                            FontWeight="Bold"
-                            FontSize="15" 
-                            Grid.ColumnSpan="4"
-                            Margin="24,110,34,0" Grid.Row="2"/>
+            Text="{Binding SearchText, Delay=500, UpdateSourceTrigger=PropertyChanged}"
+            BorderThickness="0,0,0,3"
+            Margin="20,0,20,0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BorderBrush="Black"
+            FontWeight="Bold"
+            FontSize="15"
+            VerticalAlignment="Bottom"
+        />
 
-
-
-        <TextBlock
-                            Text="Region Name:"
-                            Grid.Column="2"
-                            FontWeight="Bold"
-                            FontSize="15" 
-                            Grid.ColumnSpan="3"
-                            Margin="24,75,0,72"/>
-        <TextBlock
-                            Text="Insert Region Name"
-                            Grid.Column="5"
-                            FontWeight="Bold"
-                            FontSize="15"
-                            Margin="0,75,90,72" Grid.ColumnSpan="2"/>
-
-        <Button
-                            Content="Add"
-                            FontSize="15"
-                            FontWeight="Bold"
-                            Grid.Row="3"
-                            Grid.Column="6"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" 
-                            Width="130">
-        </Button>
-
-        <Button
-                            Content="Edit"
-                            FontSize="15"
-                            FontWeight="Bold"
-                            Grid.Column="6"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" 
-                            Width="130"/>
-        <Button
-                            Content="Delete"
-                            FontSize="15"
-                            FontWeight="Bold"
-                            Grid.Row="4"
-                            Grid.Column="6"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" 
-                            Width="130">
-        </Button>
-
-        <!--ItemsSource="{Binding Path=EmployeesWithSameRegion}"-->
         <ListBox
-            x:Name="lbEmp"
-            DisplayMemberPath="FullName"
-            ItemsSource="{Binding Path=EmployeesWithSameRegion}"
-            BorderBrush="AliceBlue"
-            Grid.Column="2" 
-            Grid.ColumnSpan="4" 
-            Margin="24,0,34,72" 
-            Grid.RowSpan="2" Grid.Row="1">
+                Grid.Row="1"
+                Grid.RowSpan="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+
+                            HorizontalContentAlignment="Stretch"
+                            BorderThickness="1.5"
+                            BorderBrush="AliceBlue"
+                            Margin="20,20,20,20"
+                            ItemsSource="{Binding Path=RegionList}"
+                            SelectedItem="{Binding Path=SelectedRegion}"
+                            DisplayMemberPath="Name">
         </ListBox>
 
-        <!--ItemsSource="{Binding Path=CustomersWithSameRegion}"-->
+        <TextBlock
+                HorizontalAlignment="Center"
+        Text="Employees in this Region"
+        Grid.Column="2"
+                Grid.ColumnSpan="2"
+        VerticalAlignment="Bottom"
+        Grid.Row="0"
+        FontWeight="Bold"
+        FontSize="15"/>
+
+        <TextBlock
+        Text="Customers in this Region"
+        Grid.ColumnSpan="2"
+        HorizontalAlignment="Center"
+        Grid.Column="4"
+        Grid.Row="0"
+        FontWeight="Bold"
+        VerticalAlignment="Bottom"
+        FontSize="15"/>
+
         <ListBox
-            ItemsSource="{Binding Path=CustomersWithSameRegion}"
-            DisplayMemberPath="FullName"
-            x:Name="lbCust"
-            BorderBrush="AliceBlue"
-            Grid.Column="2" 
-            Grid.ColumnSpan="4" 
-            Margin="24,0,34,72" 
-            Grid.RowSpan="2" Grid.Row="3">
-        </ListBox>
+        Grid.Row="1"
+        Grid.Column="2"
+        Grid.ColumnSpan="2"
+        Grid.RowSpan="5"
+        Margin="20,20,20,20"
+        x:Name="lbEmp"
+        DisplayMemberPath="FullName"
+        ItemsSource="{Binding Path=EmployeesWithSameRegion}"
+        BorderBrush="AliceBlue"/>
+
+        <ListBox
+        Grid.Row="1"
+        Grid.Column="4"
+        Grid.ColumnSpan="2"
+        Grid.RowSpan="5"
+        Margin="20,20,20,20"
+        x:Name="lbCust"
+        ItemsSource="{Binding Path=CustomersWithSameRegion}"
+        DisplayMemberPath="FullName"
+        BorderBrush="AliceBlue"/>
     </Grid>
-
 
 </UserControl>

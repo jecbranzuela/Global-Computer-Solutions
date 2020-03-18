@@ -24,20 +24,6 @@ namespace App1.ViewModels.Skill
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public SkillViewModel(int skillId,string description, int rateOfPay)
-        {
-            SkillId = skillId;
-            Description = description;
-            RateOfPay = rateOfPay;
-
-        }
-
-        public SkillViewModel(string description, int rateOfPay)
-        {
-            Description = description;
-            RateOfPay = rateOfPay;
-        }
-
         public SkillViewModel()
         {
             

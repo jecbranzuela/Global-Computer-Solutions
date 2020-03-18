@@ -25,9 +25,9 @@ namespace App1.ViewModels.Employee
         }
 
         public AddEmployeeView(EmployeeListViewModel employeeListViewModel,
-            EmployeeService employeeService, RegionService regionService) :this()
+        EmployeeRegionService employeeRegionService) :this()
         {
-            _toAddEmployee = new AddEmployeeViewModel(employeeService,regionService,employeeListViewModel);
+            _toAddEmployee = new AddEmployeeViewModel(employeeRegionService.EmployeeService, employeeRegionService.RegionService, employeeListViewModel);
 
             DataContext = _toAddEmployee;
 

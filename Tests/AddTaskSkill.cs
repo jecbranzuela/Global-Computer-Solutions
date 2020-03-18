@@ -18,7 +18,6 @@ namespace CreateTests
         {
             using var context = new GcsContext();
             var newTaskSkill = new TaskSkill();
-            newTaskSkill.NumberOfEmployeesNeeded = 3;
             newTaskSkill.TaskClassId = 1;
             newTaskSkill.TaskClassLink = context.TaskClasses.First(c => c.TaskClassId == newTaskSkill.TaskClassId);
             newTaskSkill.SkillId = 1;

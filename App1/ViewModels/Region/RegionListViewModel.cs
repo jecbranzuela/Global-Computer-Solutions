@@ -69,22 +69,13 @@ namespace App1.ViewModels.Region
             }
         }
 
-        //private void LoadEmployeeWithSelectedSkill()
-        //{
-        //    var employees = _skillService.GetEmployees(SelectedSkill.SkillId);
-        //    EmployeesWithSameSkill.Clear();
-        //    foreach (var employee in employees)
-        //    {
-        //        EmployeesWithSameSkill.Add(new EmployeeViewModel(
-        //            employee.LastName,
-        //            employee.MiddleInitial,
-        //            employee.FirstName,
-        //            employee.DateOfHire,
-        //            employee.RegionLink.Name,
-        //            employee.RegionId
-        //        ));
-        //    }
-
-        //}
+        public EditRegionViewModel EditRegionViewModel()
+        {
+            return new EditRegionViewModel(_regionService,_selectedRegion);
+        }
+        public RegionService ReturnContext()
+        {
+	        return _regionService;
+        }
     }
 }

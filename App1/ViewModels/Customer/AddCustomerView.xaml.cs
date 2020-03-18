@@ -25,9 +25,9 @@ namespace App1.ViewModels.Customer
         }
 
         public AddCustomerView(CustomerListViewModel customerListViewModel,
-            CustomerService customerService, RegionService regionService) :this()
+            CustomerRegionService customerRegionService) :this()
         {
-            _toAddCustomer = new AddCustomerViewModel(customerService,regionService,customerListViewModel);
+            _toAddCustomer = new AddCustomerViewModel(customerRegionService.CustomerService, customerRegionService.RegionService, customerListViewModel);
 
             DataContext = _toAddCustomer;
         }

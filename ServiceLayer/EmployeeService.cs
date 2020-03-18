@@ -45,6 +45,14 @@ namespace ServiceLayer
 				
 	        return skillList;
         }
+
+        public IQueryable<EmployeeSkill> GetEmployeeSkills(int employeeId)
+        {
+            return _context.EmployeeSkills
+            .Where(c => c.EmployeeId == employeeId)
+            .Include(c=>c.EmployeeLink)
+            .Include(c => c.SkillLink);
+        }
         public void EditEmployee(int employeeId, int regionId, string firstName, string lastName, string middleInitial,DateTime dateOfHire)
         {
             //using var context = new GcsContext();

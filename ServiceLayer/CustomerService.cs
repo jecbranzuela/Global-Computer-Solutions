@@ -31,7 +31,7 @@ namespace ServiceLayer
             _context.SaveChanges();
         }
 
-        public void EditCustomer(int customerId, int regionId, string firstName, string middleInitial,string lastName,int phoneNumber)
+        public void EditCustomer(int customerId, int regionId, string firstName, string middleInitial,string lastName,long phoneNumber)
         {
             var customer = _context.Customers.Find(customerId);
             customer.RegionId = regionId;

@@ -15,7 +15,7 @@ namespace App1.ViewModels.Customer
         private string _lastName;
         private string _middleInitial;
         private string _firstName;
-        private int _phoneNumber;
+        private long _phoneNumber;
         private string _region;
         private int _regionId;
         public string FullName { get; }
@@ -98,7 +98,7 @@ namespace App1.ViewModels.Customer
             }
         }
 
-        public int PhoneNumber
+        public long PhoneNumber
         {
             get => _phoneNumber;
             set

@@ -1,11 +1,12 @@
-﻿using GCSClasses.EFClasses;
+﻿using System.Collections.Generic;
+using GCSClasses.EFClasses;
 
 namespace Entities
 {
     public class TaskSkill
     {
         public int TaskSkillId { get; set; }
-        public int NumberOfEmployeesNeeded { get; set; }
+        public ICollection<TaskSkillEmployeesQuantity> TaskSkillEmployeesQuantities { get; set; }
 
         //foreign keys
         public int SkillId { get; set; }

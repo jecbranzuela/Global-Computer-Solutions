@@ -42,6 +42,11 @@
             Width="282" Margin="0,14,0,0"/>
 
         <DataGrid
+            FontWeight="SemiBold"
+            FontSize="15"
+            IsReadOnly="True"
+            ItemsSource="{Binding Path=ProjectScheduleTaskList}"
+            SelectedItem="{Binding Path=SelectedProjectScheduleTask}"
             Background="White"
             BorderBrush="AliceBlue"
             BorderThickness="3,3,3,3"
@@ -50,11 +55,6 @@
             Grid.RowSpan="8"
             Margin="10,54,10,10">
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Task Description" Width="260"></DataGridTextColumn>
-                <DataGridTextColumn Header="Start Date" MinWidth="80"></DataGridTextColumn>
-                <DataGridTextColumn Header="End Date" MinWidth="80"></DataGridTextColumn>
-            </DataGrid.Columns>
         </DataGrid>
 
         <TextBlock
@@ -98,14 +98,41 @@
             Text="Skills Needed"
             Margin="10,0,0,54" Grid.RowSpan="2"/>
 
+        <!--DisplayMemberPath="Description"-->
         <ListBox
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding Path=SkillsForScheduledTask.SkillList}"
+            SelectedItem="{Binding Path=SelectedSkillForTask}"
             BorderThickness="3,3,3,3"
             BorderBrush="AliceBlue"
             Margin="10,10,10,10"
             Grid.Column="3"
             Grid.ColumnSpan="2"
             Grid.Row="3"
-            Grid.RowSpan="5"></ListBox>
+            Grid.RowSpan="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        HorizontalAlignment="Stretch"
+                        BorderBrush="DarkSlateBlue"
+                        BorderThickness="0,0,0,3">
+                        <StackPanel>
+                            <TextBlock
+                                FontSize="10"
+                                FontWeight="SemiBold"
+                                Text="{Binding Path= Description}"/>
+                            <TextBlock
+                                FontSize="10"
+                                FontWeight="SemiBold"
+                                Text="{Binding Path= RateOfPay}"/>
+                        </StackPanel>
+
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
 
         <TextBlock
             HorizontalAlignment="Left"
@@ -118,6 +145,7 @@
             Text="Employees Assigned to Task" Margin="10,0,0,50" Grid.RowSpan="2"/>
 
         <DataGrid
+            ItemsSource="{Binding Path=AssignmentsPerSkill}"
             Margin="10,10,10,10"
             BorderThickness="3,3,3,3"
             BorderBrush="AliceBlue"
@@ -126,63 +154,52 @@
             Grid.Column="5"
             Grid.ColumnSpan="3"
             Grid.RowSpan="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="Start Date" Width="65"></DataGridTextColumn>
-                <DataGridTextColumn Header="End Date" Width="65"></DataGridTextColumn>
-                <DataGridTextColumn Header="Skill" Width="60"></DataGridTextColumn>
-            </DataGrid.Columns>
         </DataGrid>
 
         <Button
             FontWeight="Bold"
             FontSize="9"
             Content="Assign Employee"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Grid.Row="2"
             Width="77"
-            Grid.Column="4" Margin="0,0,0,23"/>
+            Grid.Column="7" Margin="0,0,10,0"/>
 
         <Button
             FontWeight="Bold"
             FontSize="9"
-            Content="Add Task Skill"
-            HorizontalAlignment="Left"
+            Content="Add Skill"
+            HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Grid.Row="2"
             Width="77"
-            Grid.Column="4" Margin="0,0,0,54" Grid.RowSpan="2"/>
+            Grid.Column="4" 
+            Margin="0,0,10,0"/>
 
         <Button
             Width="80"
             FontWeight="Bold"
             FontSize="9"
             Content="Edit Details"
-            Grid.Column="7"
-            Grid.Row="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom" Margin="0,0,0,54" Grid.RowSpan="2"></Button>
+            Grid.Column="2"
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" 
+            Margin="0,0,10,0"></Button>
 
         <Button
+            x:Name="btnAddSchedule"
+            Click="BtnAddSchedule_OnClick"
+            Margin="0,0,10,0"
             Width="80"
             FontWeight="Bold"
             FontSize="9"
-            Content="Add Task"
-            Grid.Column="7"
-            Grid.Row="1"
-            HorizontalAlignment="Left"
+            Content="Add Schedule"
+            Grid.Column="2"
+            Grid.Row="0"
+            HorizontalAlignment="Right"
             VerticalAlignment="Center"></Button>
-
-        <Button
-            Width="80"
-            FontWeight="Bold"
-            FontSize="9"
-            Content="Remove Task"
-            Grid.Column="8"
-            Grid.Row="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="0,0,0,54" Grid.RowSpan="2"></Button>
         <Button
             VerticalAlignment="Center"
             HorizontalAlignment="Left"

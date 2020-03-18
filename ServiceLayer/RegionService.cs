@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
@@ -18,6 +20,11 @@ namespace ServiceLayer
             _context = context;
         }
 
+        public void AddRegion(Region region)
+        {
+	        _context.Regions.Add(region);
+	        _context.SaveChanges();
+        }
         public IQueryable<Region> GetRegions()
         {
             return _context.Regions
@@ -53,5 +60,11 @@ namespace ServiceLayer
 
         //    return empList;
         //}
+        public void EditRegion(int regionId,string name)
+        {
+	        var region = _context.Regions.Find(regionId);
+	        region.Name = name;
+	        _context.SaveChanges();
+        }
     }
 }

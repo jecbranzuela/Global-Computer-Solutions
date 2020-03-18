@@ -19,7 +19,7 @@ namespace App1.ViewModels.Customer
 	    public string LastName { get; set; }
 	    public string MiddleInitial { get; set; }
 	    public string FirstName { get; set; }
-	    public int PhoneNumber { get; set; }
+	    public long PhoneNumber { get; set; }
 
 	    public EditCustomerViewModel(CustomerViewModel customerModel,
 	    CustomerRegionService customerRegionService)

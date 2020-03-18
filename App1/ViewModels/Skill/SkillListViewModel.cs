@@ -37,20 +37,18 @@ namespace App1.ViewModels
           _skillService = skillService;
           SkillList = new ObservableCollection<SkillViewModel>(
               _skillService.GetSkills()
-                  .Select(c => new SkillViewModel(c.SkillId,
-                      c.Description, c.RateOfPay))
+                  .Select(c => new SkillViewModel(c))
           );
       }
         private void LoadEmployeeWithSelectedSkill()
 		{
           var employees = _skillService.GetEmployees(SelectedSkill.SkillId)
-              .OrderBy(c=>c.LastName);
+              .OrderBy(c=>c.LastName).Distinct();
           EmployeesWithSameSkill.Clear();
           foreach (var employee in employees)
           {
 	          EmployeesWithSameSkill.Add(new EmployeeViewModel(employee));
           }
-
 		}
 
         public EditSkillViewModel EditSkillViewModel()
@@ -78,7 +76,7 @@ namespace App1.ViewModels
 
             foreach (var skill in skills)
             {
-                var skillModel = new SkillViewModel(skill.SkillId,skill.Description,skill.RateOfPay);
+                var skillModel = new SkillViewModel(skill);
                 SkillList.Add(skillModel);
             }
         }

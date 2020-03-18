@@ -22,5 +22,11 @@ namespace ServiceLayer
         {
             return _context.TaskClasses;
         }
+
+        public void AddTask(TaskClass toAddTask)
+        {
+	        _context.TaskClasses.Add(toAddTask);
+	        _context.SaveChanges();
+        }
     }
 }

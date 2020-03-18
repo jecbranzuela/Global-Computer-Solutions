@@ -24,5 +24,11 @@ namespace ServiceLayer
                 .Include(c=>c.EmployeeLink)
                 .Include(c=>c.SkillLink);
         }
+
+        public void AddEmployeeSkill(EmployeeSkill toAddEmpSkill)
+        {
+	        _context.EmployeeSkills.Add(toAddEmpSkill);
+	        _context.SaveChanges();
+        }
     }
 }

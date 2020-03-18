@@ -48,6 +48,7 @@ namespace App1.ViewModels.Customer
             toAddCustomer.RegionId = SelectedRegion.RegionId;
             _customerService.AddCustomer(toAddCustomer);
             _customerListViewModel.CustomerList.Insert(0,AddCustomerModel);
+            AddCustomerModel.RegionId = SelectedRegion.RegionId;
             AddCustomerModel.CustomerId = toAddCustomer.CustomerId;
             AddCustomerModel.Region = SelectedRegion.Name;
         }

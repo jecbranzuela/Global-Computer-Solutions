@@ -8,7 +8,7 @@ namespace Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleInitial { get; set; }
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
         public ICollection<Project> Projects { get; set; }
 
 

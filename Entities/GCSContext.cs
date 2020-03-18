@@ -18,10 +18,11 @@ namespace GCSClasses
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectSchedule> ProjectSchedules { get; set; }
+        //public DbSet<ProjectSchedule> ProjectSchedules { get; set; }
         public DbSet<ProjectScheduleTask> ProjectScheduleTasks { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<TaskSkillEmployeesQuantity> TaskSkillEmployeesQuantities { get; set; }
         public DbSet<TaskClass> TaskClasses { get; set; }
         public DbSet<TaskSkill> TaskSkills { get; set; }
         public DbSet<WorkLog> WorkLogs { get; set; }
@@ -42,7 +43,8 @@ namespace GCSClasses
             modelBuilder.ApplyConfiguration(new EmployeeConfig());
             modelBuilder.ApplyConfiguration(new EmployeeSkillConfig());
             modelBuilder.ApplyConfiguration(new ProjectConfig());
-            modelBuilder.ApplyConfiguration(new ProjectScheduleConfig());
+            modelBuilder.ApplyConfiguration(new TaskSkillEmployeesQuantityConfig());
+           // modelBuilder.ApplyConfiguration(new ProjectScheduleConfig());
             modelBuilder.ApplyConfiguration(new ProjectScheduleTaskConfig());
             modelBuilder.ApplyConfiguration(new RegionConfig());
             modelBuilder.ApplyConfiguration(new SkillConfig());

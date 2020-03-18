@@ -10,8 +10,8 @@
         Title="AddProjectWindow" Height="700" Width="500">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="159*"/>
-            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="182"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>

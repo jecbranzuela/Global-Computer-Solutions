@@ -89,6 +89,10 @@
                                         BorderThickness="0,0,0,3">
                             <StackPanel>
                                 <TextBlock
+                                    FontSize="10"
+                                    FontWeight="SemiBold"
+                                    Text="{Binding Path= CustomerId}"/>
+                                <TextBlock
                                                 FontSize="10"
                                                 FontWeight="SemiBold"
                                                 Text="{Binding Path= LastName}"/>

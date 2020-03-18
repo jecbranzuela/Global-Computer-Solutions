@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App1.ViewModels.Employee"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="AddEmployeeView" Height="450" Width="400">
@@ -117,7 +118,8 @@
             </ComboBox>
 
             <DatePicker
-                Text="{Binding Path=AddEmployeeModel.DateOfHire}"
+                SelectedDate="{Binding AddEmployeeModel.DateOfHire,Mode=TwoWay}"
+                DisplayDate="{x:Static System:DateTime.Now}"
                 Margin="0,30,30,0"
                 Width="170" 
                 Height="30"

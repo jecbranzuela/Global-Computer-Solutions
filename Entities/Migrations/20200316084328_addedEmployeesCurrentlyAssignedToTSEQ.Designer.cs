@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GCSClasses.Migrations
 {
     [DbContext(typeof(GcsContext))]
-    [Migration("20200302052638_v2")]
-    partial class v2
+    [Migration("20200316084328_addedEmployeesCurrentlyAssignedToTSEQ")]
+    partial class addedEmployeesCurrentlyAssignedToTSEQ
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,8 +93,8 @@ namespace GCSClasses.Migrations
                     b.Property<string>("MiddleInitial")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
@@ -188,9 +188,10 @@ namespace GCSClasses.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EstimatedEndDate")
@@ -213,23 +214,6 @@ namespace GCSClasses.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("Entities.ProjectSchedule", b =>
-                {
-                    b.Property<int>("ProjectScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProjectScheduleId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Project Schedule");
-                });
-
             modelBuilder.Entity("Entities.ProjectScheduleTask", b =>
                 {
                     b.Property<int>("ProjectScheduleTaskId")
@@ -237,15 +221,21 @@ namespace GCSClasses.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ProjectScheduleId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ScheduledEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ScheduledStartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TaskClassId")
                         .HasColumnType("int");
 
                     b.HasKey("ProjectScheduleTaskId");
 
-                    b.HasIndex("ProjectScheduleId");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("TaskClassId");
 
@@ -299,9 +289,6 @@ namespace GCSClasses.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("NumberOfEmployeesNeeded")
-                        .HasColumnType("int");
 
                     b.Property<int>("SkillId")
                         .HasColumnType("int");
@@ -361,15 +348,37 @@ namespace GCSClasses.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("TaskClassId");
 
                     b.ToTable("Task");
+                });
+
+            modelBuilder.Entity("GCSClasses.EFClasses.TaskSkillEmployeesQuantity", b =>
+                {
+                    b.Property<int>("TaskSkillEmployeesQuantityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeesCurrentlyAssigned")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeesNeeded")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectScheduleTaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskSkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TaskSkillEmployeesQuantityId");
+
+                    b.HasIndex("ProjectScheduleTaskId");
+
+                    b.HasIndex("TaskSkillId");
+
+                    b.ToTable("Task Skill Employees Quantity");
                 });
 
             modelBuilder.Entity("Entities.Assignment", b =>
@@ -438,24 +447,14 @@ namespace GCSClasses.Migrations
                     b.HasOne("Entities.Employee", "EmployeeLink")
                         .WithMany("Projects")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.ProjectSchedule", b =>
-                {
-                    b.HasOne("Entities.Project", "ProjectLink")
-                        .WithMany("ProjectSchedules")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Entities.ProjectScheduleTask", b =>
                 {
-                    b.HasOne("Entities.ProjectSchedule", "ProjectScheduleLink")
+                    b.HasOne("Entities.Project", "ProjectLink")
                         .WithMany("ProjectScheduleTasks")
-                        .HasForeignKey("ProjectScheduleId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -496,6 +495,21 @@ namespace GCSClasses.Migrations
                     b.HasOne("Entities.Bill", "BillLink")
                         .WithMany("WorkLogs")
                         .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GCSClasses.EFClasses.TaskSkillEmployeesQuantity", b =>
+                {
+                    b.HasOne("Entities.ProjectScheduleTask", "ProjectScheduleTaskLink")
+                        .WithMany("TaskSkillEmployeesQuantities")
+                        .HasForeignKey("ProjectScheduleTaskId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entities.TaskSkill", "TaskSkillLink")
+                        .WithMany("TaskSkillEmployeesQuantities")
+                        .HasForeignKey("TaskSkillId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
